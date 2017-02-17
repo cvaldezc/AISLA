@@ -43,6 +43,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnExportar = new System.Windows.Forms.Button();
             this.lblcontador = new System.Windows.Forms.Label();
             this.lblpasos = new System.Windows.Forms.Label();
             this.pgcontador = new System.Windows.Forms.ProgressBar();
@@ -76,7 +77,9 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaTools = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnExportar = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tpgeneral = new System.Windows.Forms.TabPage();
+            this.tpsettings = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -89,25 +92,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtZonaZ)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tpgeneral.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.groupBox3, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 33);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.96721F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.70492F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.53279F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(700, 486);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(711, 548);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox1
@@ -125,7 +128,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(694, 147);
+            this.groupBox1.Size = new System.Drawing.Size(705, 147);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Entradas de Archivos";
@@ -174,7 +177,7 @@
             this.txtArchivoFormato.Enabled = false;
             this.txtArchivoFormato.Location = new System.Drawing.Point(214, 110);
             this.txtArchivoFormato.Name = "txtArchivoFormato";
-            this.txtArchivoFormato.Size = new System.Drawing.Size(474, 20);
+            this.txtArchivoFormato.Size = new System.Drawing.Size(485, 20);
             this.txtArchivoFormato.TabIndex = 3;
             this.txtArchivoFormato.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -185,7 +188,7 @@
             this.txtBaseNoAislado.Enabled = false;
             this.txtBaseNoAislado.Location = new System.Drawing.Point(214, 66);
             this.txtBaseNoAislado.Name = "txtBaseNoAislado";
-            this.txtBaseNoAislado.Size = new System.Drawing.Size(473, 20);
+            this.txtBaseNoAislado.Size = new System.Drawing.Size(484, 20);
             this.txtBaseNoAislado.TabIndex = 2;
             // 
             // txtArchivoBase
@@ -195,7 +198,7 @@
             this.txtArchivoBase.Enabled = false;
             this.txtArchivoBase.Location = new System.Drawing.Point(214, 29);
             this.txtArchivoBase.Name = "txtArchivoBase";
-            this.txtArchivoBase.Size = new System.Drawing.Size(474, 20);
+            this.txtArchivoBase.Size = new System.Drawing.Size(485, 20);
             this.txtArchivoBase.TabIndex = 2;
             // 
             // label2
@@ -232,17 +235,17 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 219);
+            this.groupBox2.Location = new System.Drawing.Point(3, 246);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(694, 264);
+            this.groupBox2.Size = new System.Drawing.Size(705, 299);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.48734F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.51266F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.4276F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5724F));
             this.tableLayoutPanel2.Controls.Add(this.groupBox4, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBox5, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -250,7 +253,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(688, 245);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(699, 280);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox4
@@ -261,12 +264,25 @@
             this.groupBox4.Controls.Add(this.pgcontador);
             this.groupBox4.Controls.Add(this.pgbarpasos);
             this.groupBox4.Controls.Add(this.BtnProcesar);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(391, 3);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox4.Location = new System.Drawing.Point(397, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(294, 239);
+            this.groupBox4.Size = new System.Drawing.Size(294, 274);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportar.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.Location = new System.Drawing.Point(6, 196);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(282, 35);
+            this.btnExportar.TabIndex = 8;
+            this.btnExportar.Text = "Reporte en Excel";
+            this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // lblcontador
             // 
@@ -331,7 +347,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(382, 239);
+            this.groupBox5.Size = new System.Drawing.Size(388, 274);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Datos Adicionales";
@@ -512,7 +528,7 @@
             this.groupBox3.Controls.Add(this.btnSelDestino);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.txtArchivoDestino);
-            this.groupBox3.Location = new System.Drawing.Point(3, 158);
+            this.groupBox3.Location = new System.Drawing.Point(3, 177);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(687, 48);
             this.groupBox3.TabIndex = 1;
@@ -562,7 +578,7 @@
             this.acercaTools});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(721, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(723, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -602,26 +618,44 @@
             this.acercaTools.Text = "Acerca";
             this.acercaTools.Click += new System.EventHandler(this.acercaTools_Click);
             // 
-            // btnExportar
+            // tabControl1
             // 
-            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportar.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportar.Location = new System.Drawing.Point(6, 196);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(282, 35);
-            this.btnExportar.TabIndex = 8;
-            this.btnExportar.Text = "Reporte en Excel";
-            this.btnExportar.UseVisualStyleBackColor = true;
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            this.tabControl1.Controls.Add(this.tpgeneral);
+            this.tabControl1.Controls.Add(this.tpsettings);
+            this.tabControl1.Location = new System.Drawing.Point(0, 30);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(725, 580);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // tpgeneral
+            // 
+            this.tpgeneral.Controls.Add(this.tableLayoutPanel1);
+            this.tpgeneral.Location = new System.Drawing.Point(4, 22);
+            this.tpgeneral.Name = "tpgeneral";
+            this.tpgeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.tpgeneral.Size = new System.Drawing.Size(717, 554);
+            this.tpgeneral.TabIndex = 0;
+            this.tpgeneral.Text = "General";
+            this.tpgeneral.UseVisualStyleBackColor = true;
+            // 
+            // tpsettings
+            // 
+            this.tpsettings.Location = new System.Drawing.Point(4, 22);
+            this.tpsettings.Name = "tpsettings";
+            this.tpsettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tpsettings.Size = new System.Drawing.Size(717, 554);
+            this.tpsettings.TabIndex = 1;
+            this.tpsettings.Text = "tabPage2";
+            this.tpsettings.UseVisualStyleBackColor = true;
             // 
             // ConvertTo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(721, 514);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(723, 612);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -647,6 +681,8 @@
             this.groupBox3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tpgeneral.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -702,5 +738,8 @@
         private System.Windows.Forms.TextBox txtBaseNoAislado;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnExportar;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tpgeneral;
+        private System.Windows.Forms.TabPage tpsettings;
     }
 }

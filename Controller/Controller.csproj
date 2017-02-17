@@ -63,11 +63,13 @@
     <Compile Include="Interfaces\IExportar.cs" />
     <Compile Include="Interfaces\IReadFileable.cs" />
     <Compile Include="Interfaces\IReadFileStaadProable.cs" />
+    <Compile Include="Interfaces\IValidator.cs" />
     <Compile Include="Interfaces\IWriteEtabs.cs" />
     <Compile Include="Interfaces\IWriteStaadPROable.cs" />
     <Compile Include="ReadFileEtabs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadFileStaadPRO.cs" />
+    <Compile Include="Validator.cs" />
     <Compile Include="WriteEtabs.cs" />
     <Compile Include="WriteStaadPRO.cs" />
   </ItemGroup>

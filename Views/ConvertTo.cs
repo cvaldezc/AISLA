@@ -159,6 +159,7 @@ namespace Views
             //Console.WriteLine(ext);
             BarraProgreso.status = 1;
             statusBar();
+            #region process file if is extension for etabs
             if (ext == "e2k")
             {
                 Console.WriteLine("Etabs Read");
@@ -181,6 +182,8 @@ namespace Views
                 wa.processe2kAislado(this.chkaislado.Checked ? txtaislado.Text : "Base", Convert.ToDouble(this.lblSismoVertical.Text));
                 wa.processe2kNoAislado(this.chknoaislado.Checked ? this.txtnoaislado.Text : "story1", Convert.ToDouble(this.lblSismoVertical.Text));
             }
+            #endregion
+            #region Process if file is extension staad pro
             if (ext == "std")
             {
                 Console.WriteLine("Staad PRO Read");
@@ -209,7 +212,9 @@ namespace Views
                 wp.initData();
                 wp.processNoAisladoSTD(cad);
             }
+            #endregion
             // this.lblpasos.Text = "Completo!";
+            #region reset progressbar and another controls
             BarraProgreso.status = 4;
             statusBar();
             MessageBox.Show(this, "Archivos creados correctamente!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -218,55 +223,70 @@ namespace Views
                 BarraProgreso.tarea1.Abort();
             }
             BarraProgreso.tarea1.Join();
+            #endregion
         }
 
         private void statusBar()
         {
             Console.WriteLine("ESTADO DE BAR PROGRESO {0}", BarraProgreso.status);
-            //while (BarraProgreso.parar)
-            //{
-                // if (this == null) return;
-                // Console.WriteLine("PROGRESO BAR");
-                // Console.WriteLine(BarraProgreso.status);
-                switch (BarraProgreso.status)
-                {
-                    case 0:
-                        Invoke(new Action(() => this.lblpasos.Text = ""));
-                        Invoke(new Action(() => this.lblcontador.Text = "0/3"));
-                        Invoke(new Action(() => this.pgbarpasos.Style = ProgressBarStyle.Blocks));
-                        Invoke(new Action(() => this.pgbarpasos.Value = 0));
-                        Invoke(new Action(() => this.pgcontador.Value = 0));
-                        break;
-                    case 1:
-                        Invoke(new Action(() => this.lblpasos.Text = "Se inicio la lectura de archivo."));
-                        Invoke(new Action(() => this.lblcontador.Text = "1/3"));
-                        Invoke(new Action(() => this.pgbarpasos.Style = ProgressBarStyle.Marquee));
-                        Invoke(new Action(() => this.pgbarpasos.MarqueeAnimationSpeed = 80));
-                        Invoke(new Action(() => this.BtnProcesar.Enabled = false));
-                        break;
-                    case 2:
-                        Invoke(new Action(() => this.lblpasos.Text = "Se inicio el calculo de datos."));
-                        Invoke(new Action(() => this.lblcontador.Text = "2/3"));
-                        Invoke(new Action(() => this.pgbarpasos.MarqueeAnimationSpeed = 30));
-                        Invoke(new Action(() => this.pgcontador.Value = 33));
-                        break;
-                    case 3:
-                        Invoke(new Action(() => lblpasos.Text = "Se inicio la escritura de archivos."));
-                        Invoke(new Action(() => this.lblcontador.Text = "3/3"));
-                        Invoke(new Action(() => this.pgbarpasos.MarqueeAnimationSpeed = 5));
-                        Invoke(new Action(() => this.pgcontador.Value = 66));
-                        break;
-                    case 4:
-                        Invoke(new Action(() => this.lblpasos.Text = "Completo!"));
-                        Invoke(new Action(() => this.lblcontador.Text = "Completo!"));
-                        Invoke(new Action(() => pgbarpasos.Style = ProgressBarStyle.Blocks));
-                        Invoke(new Action(() => this.pgbarpasos.Value = 100));
-                        Invoke(new Action(() => this.pgcontador.Value = 100));
-                        Invoke(new Action(() => this.BtnProcesar.Enabled = true));
-                        break;
-                }
-                Thread.Sleep(500);
-            //}
+            switch (BarraProgreso.status)
+            {
+                case 0:
+                #region  progressbar inital process
+                    Invoke(new Action(() => this.lblpasos.Text = ""));
+                    Invoke(new Action(() => this.lblcontador.Text = "0/4"));
+                    Invoke(new Action(() => this.pgbarpasos.Style = ProgressBarStyle.Blocks));
+                    Invoke(new Action(() => this.pgbarpasos.Value = 0));
+                    Invoke(new Action(() => this.pgcontador.Value = 0));
+                    break;
+                #endregion
+                case 1:
+                #region progressbar reader file
+                    Invoke(new Action(() => this.lblpasos.Text = "Se inicio la lectura de archivo."));
+                    Invoke(new Action(() => this.lblcontador.Text = "1/4"));
+                    Invoke(new Action(() => this.pgbarpasos.Style = ProgressBarStyle.Marquee));
+                    Invoke(new Action(() => this.pgbarpasos.MarqueeAnimationSpeed = 80));
+                    Invoke(new Action(() => this.BtnProcesar.Enabled = false));
+                    break;
+                #endregion
+                case 2:
+                #region progressbar calculate of data reader
+                    Invoke(new Action(() => this.lblpasos.Text = "Se inicio el calculo de datos."));
+                    Invoke(new Action(() => this.lblcontador.Text = "3/4"));
+                    Invoke(new Action(() => this.pgbarpasos.MarqueeAnimationSpeed = 30));
+                    Invoke(new Action(() => this.pgcontador.Value = 33));
+                    break;
+                #endregion
+                case 3:
+                #region progressbar write date in the file
+                    Invoke(new Action(() => lblpasos.Text = "Se inicio la escritura de archivos."));
+                    Invoke(new Action(() => this.lblcontador.Text = "4/4"));
+                    Invoke(new Action(() => this.pgbarpasos.MarqueeAnimationSpeed = 5));
+                    Invoke(new Action(() => this.pgcontador.Value = 66));
+                    break;
+                #endregion
+                case 4:
+                #region progressbar status complete
+                    Invoke(new Action(() => this.lblpasos.Text = "Completo!"));
+                    Invoke(new Action(() => this.lblcontador.Text = "Completo!"));
+                    Invoke(new Action(() => pgbarpasos.Style = ProgressBarStyle.Blocks));
+                    Invoke(new Action(() => this.pgbarpasos.Value = 100));
+                    Invoke(new Action(() => this.pgcontador.Value = 100));
+                    Invoke(new Action(() => this.BtnProcesar.Enabled = true));
+                    break;
+                #endregion
+                case 5:
+                #region progressbar status vilidator
+                    Invoke(new Action(() => this.lblpasos.Text = "Validando...!"));
+                    Invoke(new Action(() => this.lblcontador.Text = "2/4"));
+                    Invoke(new Action(() => pgbarpasos.Style = ProgressBarStyle.Blocks));
+                    Invoke(new Action(() => this.pgbarpasos.MarqueeAnimationSpeed = 1));
+                    Invoke(new Action(() => this.pgcontador.Value = 25));
+                    Invoke(new Action(() => this.BtnProcesar.Enabled = true));
+                    break;
+                #endregion
+            }
+            Thread.Sleep(500);
         }
 
         private void txtDelta_ValueChanged(object sender, EventArgs e)
