@@ -51,9 +51,9 @@ namespace Controller
             combos.AppendLine("LOAD COMB 11 1.25CM+1.25CV +CSZ+PDZ");
             combos.AppendLine("1 1.25 2 1.25 4 1.0 6 1.0 8 1.0");
             combos.AppendLine("LOAD COMB 12 1.25CM+1.25CV-CSX-PDX");
-            combos.AppendLine("1 1.25 2 1.25 3 1.0 5 -1.0 7 -1.0 ");
+            combos.AppendLine("1 1.25 2 1.25 3 -1.0 5 -1.0 7 -1.0 ");
             combos.AppendLine("LOAD COMB 13 1.25CM+1.25CV-CSZ-PDZ");
-            combos.AppendLine("1 1.25 2 1.25 4 1.0 6 -1.0 8 -1.0 ");
+            combos.AppendLine("1 1.25 2 1.25 4 -1.0 6 -1.0 8 -1.0 ");
             combos.AppendLine("LOAD COMB 14 0.9CM-CSX-PDX");
             combos.AppendLine("1 0.9 3 -1.0 5 1.0 7 -1.0");
             combos.AppendLine("LOAD COMB 15 0.9CM+CSX+PDX");
