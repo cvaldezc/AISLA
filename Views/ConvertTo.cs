@@ -48,10 +48,14 @@ namespace Views
             if (this.oFD.ShowDialog() == DialogResult.OK)
             {
                 this.txtArchivoBase.Text = this.oFD.FileName;
-                if (this.oFD.FileName.Split(new char[] {'.'}).Last() == "std")
-                    this.btnBaseNoAislado.Enabled = true;
+                if (this.oFD.FileName.Split(new char[] { '.' }).Last() == "std")
+                {
+                    //this.btnBaseNoAislado.Enabled = true;
+                }
                 else
-                    this.btnBaseNoAislado.Enabled = false;
+                {
+                    //this.btnBaseNoAislado.Enabled = false;
+                }
             }
         }
 
@@ -91,8 +95,8 @@ namespace Views
         private void sismoVertical()
         {
             // Double delta = Convert.ToDouble(this.txtDelta.Value != null ? this.txtDelta.Value : 0);
-            Double facZona = Convert.ToDouble(this.txtZonaZ.Value != null ? this.txtZonaZ.Value : 0);
-            Double tipoSuelo = Convert.ToDouble(this.txtTipoSuelo.Value != null ? this.txtTipoSuelo.Value : 0);
+            Double facZona = Convert.ToDouble((!string.IsNullOrEmpty(txtZonaZ.Value.ToString())) ? this.txtZonaZ.Value : 0);
+            Double tipoSuelo = Convert.ToDouble((!string.IsNullOrEmpty(txtTipoSuelo.Value.ToString())) ? this.txtTipoSuelo.Value : 0);
             Double calc = (facZona * tipoSuelo * 0.2 * 2.5);
             this.lblSismoVertical.Text = Math.Round(calc, 2).ToString();
         }
@@ -160,7 +164,7 @@ namespace Views
             BarraProgreso.status = 1;
             statusBar();
             #region process file if is extension for etabs
-            if (ext == "e2k")
+            if (ext.Equals("e2k"))
             {
                 Console.WriteLine("Etabs Read");
                 ReadFileEtabs etabs = new ReadFileEtabs(path);
@@ -180,11 +184,11 @@ namespace Views
                 wa.path = this.txtArchivoBase.Text;
                 wa.destino = this.txtArchivoDestino.Text;
                 wa.processe2kAislado(this.chkaislado.Checked ? txtaislado.Text : "Base", Convert.ToDouble(this.lblSismoVertical.Text));
-                wa.processe2kNoAislado(this.chknoaislado.Checked ? this.txtnoaislado.Text : "story1", Convert.ToDouble(this.lblSismoVertical.Text));
+                // wa.processe2kNoAislado(this.chknoaislado.Checked ? this.txtnoaislado.Text : "story1", Convert.ToDouble(this.lblSismoVertical.Text));
             }
             #endregion
             #region Process if file is extension staad pro
-            if (ext == "std")
+            if (ext.Equals("std"))
             {
                 Console.WriteLine("Staad PRO Read");
                 ReadFileStaadPRO staad = new ReadFileStaadPRO();
@@ -206,7 +210,7 @@ namespace Views
                 wsp.processAisladoSTD(txt);
                 // NO AISLADO
                 WriteStaadPRO wp = new WriteStaadPRO();
-                wp.path = this.txtBaseNoAislado.Text;
+                wp.path = ""; //this.txtBaseNoAislado.Text;
                 wp.destiny = this.txtArchivoDestino.Text;
                 StringBuilder cad = wp.readFile();
                 wp.initData();
@@ -300,7 +304,7 @@ namespace Views
             this.oFD.Filter = "Formato (*.std) | *.std";
             if (this.oFD.ShowDialog() == DialogResult.OK)
             {
-                this.txtBaseNoAislado.Text = this.oFD.FileName;
+                //this.txtBaseNoAislado.Text = this.oFD.FileName;
             }
         }
 
@@ -318,9 +322,9 @@ namespace Views
         {
             BarraProgreso.status = 0;
             statusBar();
-            this.btnBaseNoAislado.Enabled = false;
+            // this.btnBaseNoAislado.Enabled = false;
             this.txtArchivoBase.Text = "";
-            this.txtBaseNoAislado.Text = "";
+            // this.txtBaseNoAislado.Text = "";
             this.txtArchivoDestino.Text = "";
             this.txtArchivoFormato.Text = "";
         }

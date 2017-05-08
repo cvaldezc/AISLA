@@ -32,13 +32,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSelArchivoFormato = new System.Windows.Forms.Button();
-            this.btnBaseNoAislado = new System.Windows.Forms.Button();
             this.btnSelArchivoBase = new System.Windows.Forms.Button();
             this.txtArchivoFormato = new System.Windows.Forms.TextBox();
-            this.txtBaseNoAislado = new System.Windows.Forms.TextBox();
             this.txtArchivoBase = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -118,13 +115,10 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnSelArchivoFormato);
-            this.groupBox1.Controls.Add(this.btnBaseNoAislado);
             this.groupBox1.Controls.Add(this.btnSelArchivoBase);
             this.groupBox1.Controls.Add(this.txtArchivoFormato);
-            this.groupBox1.Controls.Add(this.txtBaseNoAislado);
             this.groupBox1.Controls.Add(this.txtArchivoBase);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -144,19 +138,6 @@
             this.btnSelArchivoFormato.Text = "...";
             this.btnSelArchivoFormato.UseVisualStyleBackColor = true;
             this.btnSelArchivoFormato.Click += new System.EventHandler(this.btnSelArchivoFormato_Click);
-            // 
-            // btnBaseNoAislado
-            // 
-            this.btnBaseNoAislado.Enabled = false;
-            this.btnBaseNoAislado.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBaseNoAislado.Location = new System.Drawing.Point(180, 62);
-            this.btnBaseNoAislado.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBaseNoAislado.Name = "btnBaseNoAislado";
-            this.btnBaseNoAislado.Size = new System.Drawing.Size(29, 24);
-            this.btnBaseNoAislado.TabIndex = 6;
-            this.btnBaseNoAislado.Text = "...";
-            this.btnBaseNoAislado.UseVisualStyleBackColor = true;
-            this.btnBaseNoAislado.Click += new System.EventHandler(this.btnBaseNoAislado_Click);
             // 
             // btnSelArchivoBase
             // 
@@ -181,16 +162,6 @@
             this.txtArchivoFormato.TabIndex = 3;
             this.txtArchivoFormato.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // txtBaseNoAislado
-            // 
-            this.txtBaseNoAislado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBaseNoAislado.Enabled = false;
-            this.txtBaseNoAislado.Location = new System.Drawing.Point(214, 66);
-            this.txtBaseNoAislado.Name = "txtBaseNoAislado";
-            this.txtBaseNoAislado.Size = new System.Drawing.Size(484, 20);
-            this.txtBaseNoAislado.TabIndex = 2;
-            // 
             // txtArchivoBase
             // 
             this.txtArchivoBase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -210,16 +181,6 @@
             this.label2.Size = new System.Drawing.Size(147, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Formato ( *.xlsx | *.txt )";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(16, 68);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(158, 13);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Archivo No Aislado ( *.std )";
             // 
             // label1
             // 
@@ -530,7 +491,7 @@
             this.groupBox3.Controls.Add(this.txtArchivoDestino);
             this.groupBox3.Location = new System.Drawing.Point(3, 177);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(687, 48);
+            this.groupBox3.Size = new System.Drawing.Size(702, 48);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Salida de Archivos";
@@ -564,7 +525,7 @@
             this.txtArchivoDestino.Enabled = false;
             this.txtArchivoDestino.Location = new System.Drawing.Point(132, 19);
             this.txtArchivoDestino.Name = "txtArchivoDestino";
-            this.txtArchivoDestino.Size = new System.Drawing.Size(549, 20);
+            this.txtArchivoDestino.Size = new System.Drawing.Size(564, 20);
             this.txtArchivoDestino.TabIndex = 4;
             // 
             // oFD
@@ -646,7 +607,6 @@
             this.tpsettings.Padding = new System.Windows.Forms.Padding(3);
             this.tpsettings.Size = new System.Drawing.Size(717, 554);
             this.tpsettings.TabIndex = 1;
-            this.tpsettings.Text = "tabPage2";
             this.tpsettings.UseVisualStyleBackColor = true;
             // 
             // ConvertTo
@@ -734,9 +694,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaTools;
-        private System.Windows.Forms.Button btnBaseNoAislado;
-        private System.Windows.Forms.TextBox txtBaseNoAislado;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tpgeneral;
