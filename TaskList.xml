@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tasks>
+  <item>
+    <text>verify file exist</text>
+    <finished>true</finished>
+  </item>
+  <item>
+    <text>read all lines</text>
+    <finished>true</finished>
+  </item>
+  <item>
+    <text>declare properties</text>
+    <finished>true</finished>
+  </item>
+  <item>
+    <text>verified exists titles</text>
+    <finished>true</finished>
+  </item>
+  <item>
+    <text>add content for each title</text>
+    <finished>true</finished>
+  </item>
+  <item>
+    <text>if  titles not exist add lasted title LOG</text>
+    <finished>true</finished>
+  </item>
+  <item>
+    <text>create file aislado</text>
+    <finished>true</finished>
+  </item>
+  <item>
+    <text>clean content of the declared</text>
+    <finished>false</finished>
+  </item>
+</Tasks>

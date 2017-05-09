@@ -20,16 +20,13 @@ namespace Controller
             if (File.Exists(path))
             {
                 // before valid meets the requirements
-
-                // iniciamos lectura de archivo
-                //using (StreamReader read = new StreamReader(this.path, Encoding.UTF8))
-                //{
                 #region Read file
                 String line = "";
                 StringBuilder allbody = new StringBuilder();
                 bool log = false;
-                // Console.WriteLine(File.ReadAllText(path, Encoding.UTF8));
-                List<string> toText = File.ReadAllLines(path, Encoding.UTF8).ToList();
+                List<string> toText = new List<string>();
+                List<string> textfile = File.ReadAllLines(path, Encoding.UTF8).ToList();
+
                 // int count = 1;
                 IDictionary<string, IDictionary<string, object>> properties = new Dictionary<string, IDictionary<string, object>>()
                 {
@@ -82,7 +79,7 @@ namespace Controller
                         {
                             #region data extends
                             { "exists", false },
-                            { "clean", true },
+                            { "clean", false },
                             { "index", -1 },
                             { "value", "\r\n"+
                                         ""+ String.Format("  COMBO \"MV1\"  TYPE \"Linear Add\"", cm) +"\r\n" +
@@ -189,51 +186,65 @@ namespace Controller
                     },
                     #endregion
                 };
-                for (int i = 0; i < toText.Count; i++)
+                for (ushort i = 0; i < textfile.Count; i++)
                 {
-                    line = toText[i].ToString();
+                    #region get index titles if exist
+                    line = textfile[i].ToString();
+                    toText.Add(line);
                     switch (line)
                     {
                         case "$ LOAD PATTERNS":
                             properties[line]["exists"] = true;
-                            properties[line]["index"] = i;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
                             Console.WriteLine(line);
                             Console.WriteLine("INDEX " + i);
                             break;
                         case "$ LOAD CASES":
                             properties[line]["exists"] = true;
-                            properties[line]["index"] = i;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
                             Console.WriteLine(line);
                             Console.WriteLine("INDEX " + i);
                             break;
                         case "$ POINT OBJECT LOADS":
                             properties[line]["exists"] = true;
-                            properties[line]["index"] = i;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
                             Console.WriteLine(line);
                             Console.WriteLine("INDEX " + i);
                             break;
                         case "$ FRAME OBJECT LOADS":
                             properties[line]["exists"] = true;
-                            properties[line]["index"] = i;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
                             Console.WriteLine(line);
                             Console.WriteLine("INDEX " + i);
                             break;
                         case "$ LOAD COMBINATIONS":
                             properties[line]["exists"] = true;
-                            properties[line]["index"] = i;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
                             Console.WriteLine(line);
                             Console.WriteLine("INDEX " + i);
                             break;
                         case "$ LOG":
                             Console.WriteLine(line);
                             Console.WriteLine("INDEX " + i);
-                            properties["$ LOG"]["index"] = i;
+                            properties["$ LOG"]["index"] = toText.Count - 1;
                             break;
                     }
+                    #endregion
                 }
 
                 foreach (string item in properties.Keys)
                 {
+                    #region add content for each title in the file exist and if not
                     if (!item.ToString().Equals("$ LOG"))
                     {
                         if (Convert.ToBoolean(properties[item]["exists"]))
@@ -242,7 +253,6 @@ namespace Controller
                             String body = "\r\n \r\n" +item+ "\r\n \r\n";
                             body += Convert.ToString(properties[item]["value"]);
                             body += "\r\n \r\n";
-                            //toText.Insert(Convert.ToInt16(index), body);
                             toText[index] = body;
                             Console.WriteLine(item);
                             Console.WriteLine(" EXISTS ADD");
@@ -254,193 +264,34 @@ namespace Controller
                             Int16 index = Convert.ToInt16(properties["$ LOG"]["index"]);
                             String text = toText[index];
                             Console.WriteLine("INDEX " + index);
-                            Console.WriteLine("content " + text);
+                            //Console.WriteLine("content " + text);
                             if (text.Equals("$ LOG"))
                                 text = "";
                             text += "\r\n \r\n" + item + "\r\n \r\n";
                             text += Convert.ToString(properties[item]["value"]);
                             text += "\r\n"; 
-                            // toText.Insert(index + 2, text);
                             toText[index] = text;
                             log = true;
                         }
                     }
+                    #endregion
                 }
 
                 // now clean other line if exists
-
                 // finally add $ LOG if only keys not exists
                 if (log)
                 {
-                    Int16 index = Convert.ToInt16(properties["$ LOG"]["index"]);
+                    #region add title $ LOG
+                    UInt16 index = Convert.ToUInt16(properties["$ LOG"]["index"]);
                     String text = toText[index];
                     text += "\r\n$ LOG\r\n";
                     toText[index] = text;
+                    #endregion
                 }
-
                 // create new body text file
                 allbody.Append(string.Join("\r\n", toText.ToArray()));
-
-                //for (int i = 0; i < File.ReadAllLines(path).Length; i++)
-                //{
-                //    //line = read.ReadLine();
-                //    #region switch
-                //    count++;
-                //    switch (line)
-                //    {
-                //        case "$ LOAD PATTERNS":
-                //            #region case load patterns
-                //            //Text.AppendLine(line);
-                //            //Text.AppendLine("  LOADPATTERN \"PDSX\"  TYPE  \"Seismic\"  SELFWEIGHT  0\n\r");
-                //            //Text.AppendLine("  LOADPATTERN \"PDSY\"  TYPE  \"Seismic\"  SELFWEIGHT  0\n\r");
-                //            //Text.AppendLine("  SEISMIC \"PDSX\"  \"User Loads\"\n\r");
-                //            //Text.AppendLine("  SEISMIC \"PDSY\"  \"User Loads\"\n\r");
-                //            #endregion
-                //            break;
-                //        case "$ LOAD CASES":
-                //            #region case load cases in file
-                //            Text.AppendLine(line);
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  LOADCASE \"PDSX\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\"");
-                //            //Text.AppendLine("  LOADCASE \"PDSX\"  LOADPAT  \"PDSX\"  SF  1 ");
-                //            //Text.AppendLine("  LOADCASE \"PDSY\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\"");
-                //            //Text.AppendLine("  LOADCASE \"PDSY\"  LOADPAT  \"PDSY\"  SF  1");
-                //            //Text.AppendLine("");
-                //            #endregion
-                //            break;
-                //        case "$ POINT OBJECT LOADS":
-                //            #region add point objects load
-                //            load = true;
-                //            Text.AppendLine(line);
-                //            //// agregamos datos
-                //            //foreach (DataRow row in Model.MDEtabs.dtSX.Rows)
-                //            //{
-                //            //    // POINTLOAD	1	Base	TYPE	FORCE	LC	PDSX	MY	12.44
-                //            //    Text.AppendLine(String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  PDSX  MY  {2}", row["joint"], story, row["my"]));
-                //            //}
-                //            //Text.AppendLine("");
-                //            //foreach (DataRow row in Model.MDEtabs.dtSY.Rows)
-                //            //{
-                //            //    Text.AppendLine(String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  PDSY  MX  -{2}", row["joint"], story, row["mx"]));
-                //            //}
-                //            Text.AppendLine("");
-                //            #endregion
-                //            break;
-                //        case "$ FRAME OBJECT LOADS":
-                //            #region frame objects loads
-                //            load = false;
-                //            Text.AppendLine(line);
-                //            #endregion
-                //            break;
-                //        case "$ LOAD COMBINATIONS":
-                //            #region load combinations
-                //            Text.AppendLine(line);
-                //            //Text.AppendLine(String.Format("  COMBO \"MV1\"  TYPE \"Linear Add\"", cm));
-                //            //Text.AppendLine("  COMBO \"MV1\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                //            //Text.AppendLine("  COMBO \"MV1\"  LOADCASE \"Dead\"  SF 1.4 ");
-                //            //Text.AppendLine("  COMBO \"MV1\"  LOADCASE \"Live\"  SF 1.7 ");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MVSX2+\"  TYPE \"Linear Add\"  ");
-                //            //Text.AppendLine("  COMBO \"MVSX2+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                //            //Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"Dead\"  SF 1.25 ");
-                //            //Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"Live\"  SF 1.25 ");
-                //            //Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"SX\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"SXV\"  SF 1 ");
-                //            //Text.AppendLine(String.Format("  COMBO \"MVSX2+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"PDSX\"  SF 1");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MSX3+\"  TYPE \"Linear Add\"  ");
-                //            //Text.AppendLine("  COMBO \"MSX3+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                //            //Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"Dead\"  SF 0.9 ");
-                //            //Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"SX\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"SXV\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"SV\"  SF 1");
-                //            //Text.AppendLine(String.Format("  COMBO \"MSX3+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"PDSX\"  SF 1");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MVSX2-\"  TYPE \"Linear Add\"  ");
-                //            //Text.AppendLine("  COMBO \"MVSX2-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                //            //Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"Dead\"  SF 1.25 ");
-                //            //Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"Live\"  SF 1.25 ");
-                //            //Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"SX\"  SF -1");
-                //            //Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"SXV\"  SF 1 ");
-                //            //Text.AppendLine(String.Format("  COMBO \"MVSX2-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"PDSX\"  SF -1");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MSX3-\"  TYPE \"Linear Add\"  ");
-                //            //Text.AppendLine("  COMBO \"MSX3-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                //            //Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"Dead\"  SF 0.9 ");
-                //            //Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"SX\"  SF -1");
-                //            //Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"SXV\"  SF 1 ");
-                //            //Text.AppendLine(String.Format("  COMBO \"MSX3-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"PDSX\"  SF -1");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MVSY2+\"  TYPE \"Linear Add\"  ");
-                //            //Text.AppendLine("  COMBO \"MVSY2+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\" ");
-                //            //Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"Dead\"  SF 1.25 ");
-                //            //Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"Live\"  SF 1.25 ");
-                //            //Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"SY\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"SYV\"  SF 1 ");
-                //            //Text.AppendLine(String.Format("  COMBO \"MVSY2+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"PDSY\"  SF 1");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MSY3+\"  TYPE \"Linear Add\"  ");
-                //            //Text.AppendLine("  COMBO \"MSY3+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                //            //Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"Dead\"  SF 0.9 ");
-                //            //Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"SY\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"SYV\"  SF 1 ");
-                //            //Text.AppendLine(String.Format("  COMBO \"MSY3+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"PDSY\"  SF 1");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MVSY2-\"  TYPE \"Linear Add\"  ");
-                //            //Text.AppendLine("  COMBO \"MVSY2-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\" ");
-                //            //Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"Dead\"  SF 1.25 ");
-                //            //Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"Live\"  SF 1.25");
-                //            //Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"SY\"  SF -1");
-                //            //Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"SYV\"  SF 1 ");
-                //            //Text.AppendLine(String.Format("  COMBO \"MVSY2-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"PDSY\"  SF -1");
-                //            //Text.AppendLine("");
-                //            //Text.AppendLine("  COMBO \"MSY3-\"  TYPE \"Linear Add\" ");
-                //            //Text.AppendLine("  COMBO \"MSY3-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                //            //Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"Dead\"  SF 0.9 ");
-                //            //Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"SY\"  SF -1");
-                //            //Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"SYV\"  SF 1 ");
-                //            //Text.AppendLine(String.Format("  COMBO \"MSY3-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                //            //Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"PDSY\"  SF -1");
-
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  TYPE \"Envelope\" ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MV1\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2+\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3+\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2-\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3-\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2+\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3+\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2-\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3-\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2+\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3+\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2-\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3-\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2+\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3+\"  SF 1 ");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2-\"  SF 1");
-                //            //Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3-\"  SF 1 ");
-                //            #endregion
-                //            break;
-                //        default:
-                //            if (!load)
-                //            {
-                //                Text.AppendLine(line);
-                //            }
-                //            break;
-                //    }
-                //    // Console.WriteLine(count);
-                //    #endregion
-                //}
-
                 // obtener nombre de archivo
+                #region create file aislado
                 string[] par = this.path.Split(new char[] { '\\' });
                 String direccion = destino;
                 direccion += String.Format(@"\{0} - AISLADO.e2k", (par[par.Length - 1].Split('.')[0]));
@@ -448,9 +299,9 @@ namespace Controller
                 write.Write(allbody.ToString());
                 write.Close();
                 Console.WriteLine("FINISH WRITE FILE!!!");
+                #endregion
                 //read.Close();
                 #endregion
-                //}
             }
         }
 
@@ -471,6 +322,32 @@ namespace Controller
                 _tmp.AppendLine(String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  PDSY  MX  -{2}", row["joint"], story, row["mx"]));
             }
             return _tmp;
+        }
+
+        private ushort cleanContentObject(ushort index, List<string> list)
+        {
+            Console.WriteLine("INDEX CLEAN DATA " + index);
+            ushort _index = 0;
+            index++;
+            Console.WriteLine("INDEX CLEAN DATA INCREMENT " + index);
+            try
+            {
+                for(ushort i = index; i < list.Count; i++)
+                {
+                    if (list[i].ToString().IndexOf("$") == 0)
+                    {
+                        _index = i;
+                        break;
+                    }
+                }
+                Console.WriteLine("INDEX CLEAN DATA FINISH " + _index);
+                list = new List<string>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return --_index;
         }
 
         #region IWriteEtabs Members

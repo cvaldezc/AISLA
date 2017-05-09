@@ -77,6 +77,17 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpgeneral = new System.Windows.Forms.TabPage();
             this.tpsettings = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.settingEtabs = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.settingsStaadPro = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -91,6 +102,13 @@
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpgeneral.SuspendLayout();
+            this.tpsettings.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.settingEtabs.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -104,9 +122,9 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.96721F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.70492F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.53279F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.16788F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.40146F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.61314F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(711, 548);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -122,7 +140,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(705, 147);
+            this.groupBox1.Size = new System.Drawing.Size(705, 106);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Entradas de Archivos";
@@ -130,7 +148,7 @@
             // btnSelArchivoFormato
             // 
             this.btnSelArchivoFormato.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelArchivoFormato.Location = new System.Drawing.Point(180, 106);
+            this.btnSelArchivoFormato.Location = new System.Drawing.Point(180, 62);
             this.btnSelArchivoFormato.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelArchivoFormato.Name = "btnSelArchivoFormato";
             this.btnSelArchivoFormato.Size = new System.Drawing.Size(29, 24);
@@ -156,7 +174,7 @@
             this.txtArchivoFormato.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtArchivoFormato.Enabled = false;
-            this.txtArchivoFormato.Location = new System.Drawing.Point(214, 110);
+            this.txtArchivoFormato.Location = new System.Drawing.Point(214, 66);
             this.txtArchivoFormato.Name = "txtArchivoFormato";
             this.txtArchivoFormato.Size = new System.Drawing.Size(485, 20);
             this.txtArchivoFormato.TabIndex = 3;
@@ -176,7 +194,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 112);
+            this.label2.Location = new System.Drawing.Point(16, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(147, 13);
             this.label2.TabIndex = 1;
@@ -196,9 +214,9 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 246);
+            this.groupBox2.Location = new System.Drawing.Point(3, 174);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(705, 299);
+            this.groupBox2.Size = new System.Drawing.Size(705, 371);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -214,7 +232,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(699, 280);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(699, 352);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox4
@@ -228,7 +246,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox4.Location = new System.Drawing.Point(397, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(294, 274);
+            this.groupBox4.Size = new System.Drawing.Size(294, 346);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             // 
@@ -308,7 +326,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(388, 274);
+            this.groupBox5.Size = new System.Drawing.Size(388, 346);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Datos Adicionales";
@@ -489,7 +507,7 @@
             this.groupBox3.Controls.Add(this.btnSelDestino);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.txtArchivoDestino);
-            this.groupBox3.Location = new System.Drawing.Point(3, 177);
+            this.groupBox3.Location = new System.Drawing.Point(3, 118);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(702, 48);
             this.groupBox3.TabIndex = 1;
@@ -602,19 +620,148 @@
             // 
             // tpsettings
             // 
+            this.tpsettings.Controls.Add(this.tabControl2);
             this.tpsettings.Location = new System.Drawing.Point(4, 22);
             this.tpsettings.Name = "tpsettings";
             this.tpsettings.Padding = new System.Windows.Forms.Padding(3);
             this.tpsettings.Size = new System.Drawing.Size(717, 554);
             this.tpsettings.TabIndex = 1;
+            this.tpsettings.Text = "Configuración";
             this.tpsettings.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl2.Controls.Add(this.settingEtabs);
+            this.tabControl2.Controls.Add(this.settingsStaadPro);
+            this.tabControl2.Location = new System.Drawing.Point(8, 6);
+            this.tabControl2.Multiline = true;
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(712, 548);
+            this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControl2.TabIndex = 0;
+            // 
+            // settingEtabs
+            // 
+            this.settingEtabs.Controls.Add(this.groupBox8);
+            this.settingEtabs.Controls.Add(this.groupBox7);
+            this.settingEtabs.Location = new System.Drawing.Point(23, 4);
+            this.settingEtabs.Name = "settingEtabs";
+            this.settingEtabs.Padding = new System.Windows.Forms.Padding(3);
+            this.settingEtabs.Size = new System.Drawing.Size(685, 540);
+            this.settingEtabs.TabIndex = 0;
+            this.settingEtabs.Text = "Etabs";
+            this.settingEtabs.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.groupBox10);
+            this.groupBox8.Controls.Add(this.label11);
+            this.groupBox8.Location = new System.Drawing.Point(346, 6);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(334, 234);
+            this.groupBox8.TabIndex = 1;
+            this.groupBox8.TabStop = false;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.checkedListBox2);
+            this.groupBox10.Location = new System.Drawing.Point(16, 45);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(312, 183);
+            this.groupBox10.TabIndex = 2;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "LIMPIAR CONTENIDO";
+            // 
+            // checkedListBox2
+            // 
+            this.checkedListBox2.CheckOnClick = true;
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Items.AddRange(new object[] {
+            "LOAD PATTERNS",
+            "LOAD CASES",
+            "POINT OBJECTS LOADS",
+            "FRAME OBJECTS LOADS",
+            "LOAD COMBINATIONS"});
+            this.checkedListBox2.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.checkedListBox2.Size = new System.Drawing.Size(300, 79);
+            this.checkedListBox2.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 16);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(121, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "MODELO NO AISLADO";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.groupBox9);
+            this.groupBox7.Controls.Add(this.label10);
+            this.groupBox7.Location = new System.Drawing.Point(6, 6);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(334, 234);
+            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabStop = false;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.checkedListBox1);
+            this.groupBox9.Location = new System.Drawing.Point(16, 45);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(312, 183);
+            this.groupBox9.TabIndex = 2;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "LIMPIAR CONTENIDO";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.CheckOnClick = true;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "LOAD PATTERNS",
+            "LOAD CASES",
+            "POINT OBJECTS LOADS",
+            "FRAME OBJECTS LOADS",
+            "LOAD COMBINATIONS"});
+            this.checkedListBox1.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(300, 79);
+            this.checkedListBox1.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "MODELO AISLADO";
+            // 
+            // settingsStaadPro
+            // 
+            this.settingsStaadPro.Location = new System.Drawing.Point(23, 4);
+            this.settingsStaadPro.Name = "settingsStaadPro";
+            this.settingsStaadPro.Padding = new System.Windows.Forms.Padding(3);
+            this.settingsStaadPro.Size = new System.Drawing.Size(685, 540);
+            this.settingsStaadPro.TabIndex = 1;
+            this.settingsStaadPro.Text = "Staad Pro";
+            this.settingsStaadPro.UseVisualStyleBackColor = true;
             // 
             // ConvertTo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(723, 612);
+            this.ClientSize = new System.Drawing.Size(723, 495);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -643,6 +790,15 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tpgeneral.ResumeLayout(false);
+            this.tpsettings.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.settingEtabs.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -698,5 +854,16 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tpgeneral;
         private System.Windows.Forms.TabPage tpsettings;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage settingEtabs;
+        private System.Windows.Forms.TabPage settingsStaadPro;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.Label label11;
     }
 }

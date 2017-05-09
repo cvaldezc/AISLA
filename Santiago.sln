@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{A211D83F-2D98-465D-A200-C5AF41846306}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{1B517C4F-049B-4F9C-A259-7D19A67A8F93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -94,6 +96,26 @@ Global
 		{A211D83F-2D98-465D-A200-C5AF41846306}.Release|x64.ActiveCfg = Release
 		{A211D83F-2D98-465D-A200-C5AF41846306}.SingleImage|Any CPU.ActiveCfg = Release
 		{A211D83F-2D98-465D-A200-C5AF41846306}.SingleImage|x64.ActiveCfg = Release
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.CD_ROM|x64.ActiveCfg = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.CD_ROM|x64.Build.0 = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Debug|x64.Build.0 = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.DVD-5|x64.ActiveCfg = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.DVD-5|x64.Build.0 = Debug|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Release|x64.ActiveCfg = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.Release|x64.Build.0 = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.SingleImage|x64.ActiveCfg = Release|Any CPU
+		{1B517C4F-049B-4F9C-A259-7D19A67A8F93}.SingleImage|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
