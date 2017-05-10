@@ -21,38 +21,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6F06D4F2DD0B444687304EC34A9975D4"
+        "MsmKey" = "8:_2943225E21B949CB887626E68C0701C0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7F5E140E108E466E8E4A5754729CD825"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_4DAE22739FB9A0156F82452BE8416ED0"
+        "OwnerKey" = "8:_2943225E21B949CB887626E68C0701C0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A5ACADEE906F746C1BF6B542EEDB46AA"
-        "OwnerKey" = "8:_AE41819B71CA3D91B712F27A4E0529AD"
+        "MsmKey" = "8:_6922BCBF993EBEB745583C4723F2F9E5"
+        "OwnerKey" = "8:_4DAE22739FB9A0156F82452BE8416ED0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A5ACADEE906F746C1BF6B542EEDB46AA"
-        "OwnerKey" = "8:_7F5E140E108E466E8E4A5754729CD825"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AE41819B71CA3D91B712F27A4E0529AD"
-        "OwnerKey" = "8:_7F5E140E108E466E8E4A5754729CD825"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AE41819B71CA3D91B712F27A4E0529AD"
-        "OwnerKey" = "8:_6F06D4F2DD0B444687304EC34A9975D4"
+        "MsmKey" = "8:_6922BCBF993EBEB745583C4723F2F9E5"
+        "OwnerKey" = "8:_2943225E21B949CB887626E68C0701C0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,25 +64,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7F5E140E108E466E8E4A5754729CD825"
+        "OwnerKey" = "8:_6922BCBF993EBEB745583C4723F2F9E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AE41819B71CA3D91B712F27A4E0529AD"
+        "OwnerKey" = "8:_2943225E21B949CB887626E68C0701C0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A5ACADEE906F746C1BF6B542EEDB46AA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6F06D4F2DD0B444687304EC34A9975D4"
+        "OwnerKey" = "8:_4DAE22739FB9A0156F82452BE8416ED0"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -122,6 +104,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,KB2468871"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 (x86 and x64) and Update for .NET Framework 4 (KB2468871)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,KB2468871"
+                    }
+                }
             }
         }
         "Release"
@@ -214,51 +204,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6F06D4F2DD0B444687304EC34A9975D4"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4DAE22739FB9A0156F82452BE8416ED0"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AISLA, Version=1.6.0.9, Culture=neutral, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:Controller, Version=1.5.0.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_6F06D4F2DD0B444687304EC34A9975D4"
+                    "_4DAE22739FB9A0156F82452BE8416ED0"
                     {
-                    "Name" = "8:AISLA.exe"
+                    "Name" = "8:Controller.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Views\\bin\\x64\\Release\\AISLA.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A5ACADEE906F746C1BF6B542EEDB46AA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A5ACADEE906F746C1BF6B542EEDB46AA"
-                    {
-                    "Name" = "8:Model.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Model.dll"
+            "SourcePath" = "8:Controller.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
@@ -276,20 +235,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AE41819B71CA3D91B712F27A4E0529AD"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6922BCBF993EBEB745583C4723F2F9E5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Controller, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AE41819B71CA3D91B712F27A4E0529AD"
+                    "_6922BCBF993EBEB745583C4723F2F9E5"
                     {
-                    "Name" = "8:Controller.dll"
+                    "Name" = "8:Model.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Controller.dll"
+            "SourcePath" = "8:Model.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
@@ -435,7 +394,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AISLA"
         "ProductCode" = "8:{55A8130D-1650-4C67-AA2B-CA34EB08BC36}"
-        "PackageCode" = "8:{530C9C73-9F96-497F-9844-55118FCAF78A}"
+        "PackageCode" = "8:{0318F9A7-B6E6-4706-91C6-E0B298096158}"
         "UpgradeCode" = "8:{A6BB93D1-E308-46CC-9CE6-C839D18AF86A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -563,7 +522,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_6F06D4F2DD0B444687304EC34A9975D4"
+            "Target" = "8:_2943225E21B949CB887626E68C0701C0"
             "Folder" = "8:_82A8D7EAAFC04F05A2F1E4A1C682A918"
             "WorkingFolder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
             "Icon" = "8:_22FA1F06ECE54D0A87E16B17838F6DC4"
@@ -577,7 +536,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_6F06D4F2DD0B444687304EC34A9975D4"
+            "Target" = "8:_2943225E21B949CB887626E68C0701C0"
             "Folder" = "8:_7B542A93E8B84B2D89321D78E2FCFB22"
             "WorkingFolder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
             "Icon" = "8:_22FA1F06ECE54D0A87E16B17838F6DC4"
@@ -1095,9 +1054,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7F5E140E108E466E8E4A5754729CD825"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2943225E21B949CB887626E68C0701C0"
             {
-            "SourcePath" = "8:..\\Views\\obj\\x64\\Release\\AISLA.exe"
+            "SourcePath" = "8:..\\Views\\obj\\x64\\Debug\\AISLA.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
@@ -1115,7 +1074,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:Release|x64"
+            "OutputConfiguration" = "8:Debug|x64"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{F62897A1-1CC4-4405-AEAA-0339A0201D4E}"
             "ShowKeyOutput" = "11:TRUE"
