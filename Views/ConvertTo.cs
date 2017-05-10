@@ -19,6 +19,7 @@ namespace Views
             InitializeComponent();
             sismoVertical();
             chckText();
+            checkedDefaultEtabs();
             CheckForIllegalCrossThreadCalls = false;
         }
 
@@ -91,6 +92,18 @@ namespace Views
         /// <summaty>
         /// block functions
         /// </summary>
+        /// 
+        protected void checkedDefaultEtabs()
+        {
+            for (int i = 0; i < etabsclbaislado.Items.Count; i++)
+            {
+                etabsclbaislado.SetItemChecked(i, true);
+            }
+            for (int i = 0; i < etabscblnosislado.Items.Count; i++)
+            {
+                etabscblnosislado.SetItemChecked(i, true);
+            }
+        }
 
         private void sismoVertical()
         {
@@ -113,34 +126,21 @@ namespace Views
 
         private void chckText()
         {
-            foreach (Control item in this.groupBox6.Controls)
+            Console.WriteLine("INSTAN CLICK");
+            if (chkaislado.Checked)
             {
-                if (item is CheckBox)
-                {
-                    CheckBox cp = (CheckBox)item;
-                    if (cp.Checked)
-                    {
-                        if ((string)cp.Tag == "aislado")
-                        {
-                            txtaislado.Enabled = true;
-                        }
-                        else
-                        {
-                            txtnoaislado.Enabled = true;
-                        }
-                    }
-                    else
-                    {
-                        if ((string)cp.Tag == "aislado")
-                        {
-                            txtaislado.Enabled = false;
-                        }
-                        else
-                        {
-                            txtnoaislado.Enabled = false;
-                        }
-                    }
-                }
+                txtaislado.Enabled = true;
+            }else
+            {
+                txtaislado.Enabled = false;
+            }
+
+            if (chknoaislado.Checked)
+            {
+                txtnoaislado.Enabled = true;
+            }else
+            {
+                txtnoaislado.Enabled = false;
             }
         }
 
@@ -180,11 +180,20 @@ namespace Views
                 statusBar();
                 //Thread.Sleep(3600);
                 // escritura de archivos
-                WriteEtabs wa = new WriteEtabs();
-                wa.path = this.txtArchivoBase.Text;
+                WriteEtabs wa = new WriteEtabs(this.txtArchivoBase.Text);
                 wa.destino = this.txtArchivoDestino.Text;
-                wa.processe2kAislado(this.chkaislado.Checked ? txtaislado.Text : "Base", Convert.ToDouble(this.lblSismoVertical.Text));
-                // wa.processe2kNoAislado(this.chknoaislado.Checked ? this.txtnoaislado.Text : "story1", Convert.ToDouble(this.lblSismoVertical.Text));
+                Dictionary<string, bool> chksaislado = new Dictionary<string, bool>();
+                for (int i = 0; i < etabsclbaislado.Items.Count; i++)
+                {
+                    chksaislado.Add(etabsclbaislado.Items[i].ToString(), etabsclbaislado.GetItemChecked(i));
+                }
+                wa.processe2kAislado(this.chkaislado.Checked ? txtaislado.Text : "Base", Convert.ToDouble(this.lblSismoVertical.Text), chksaislado);
+                Dictionary<string, bool> chksnoaislado = new Dictionary<string, bool>();
+                for (int i = 0; i < etabscblnosislado.Items.Count; i++)
+                {
+                    chksnoaislado.Add(etabscblnosislado.Items[i].ToString(), etabscblnosislado.GetItemChecked(i));
+                }
+                wa.processe2kNoAislado(this.chknoaislado.Checked ? this.txtnoaislado.Text : "story1", Convert.ToDouble(this.lblSismoVertical.Text), chksnoaislado);
             }
             #endregion
             #region Process if file is extension staad pro

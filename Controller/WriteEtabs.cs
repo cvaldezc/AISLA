@@ -12,12 +12,22 @@ namespace Controller
 
         public String path;
         public String destino;
+        protected List<string> textfile;
+
+        public WriteEtabs(string _xpath)
+        {
+            this.path = _xpath;
+            if (File.Exists(path))
+            {
+                textfile = File.ReadAllLines(path, Encoding.UTF8).ToList();
+            }
+        }
 
         #region IWriteEtabs Members
 
-        public void processe2kAislado(String story, Double cm)
+        public void processe2kAislado(String story, Double cm, IDictionary<string, bool> fclean)
         {
-            if (File.Exists(path))
+            if (textfile.Count > 0)
             {
                 // before valid meets the requirements
                 #region Read file
@@ -25,7 +35,7 @@ namespace Controller
                 StringBuilder allbody = new StringBuilder();
                 bool log = false;
                 List<string> toText = new List<string>();
-                List<string> textfile = File.ReadAllLines(path, Encoding.UTF8).ToList();
+                // List<string> textfile = File.ReadAllLines(path, Encoding.UTF8).ToList();
 
                 // int count = 1;
                 IDictionary<string, IDictionary<string, object>> properties = new Dictionary<string, IDictionary<string, object>>()
@@ -186,6 +196,13 @@ namespace Controller
                     },
                     #endregion
                 };
+                // set status clean content
+                foreach(KeyValuePair<string, bool> item in fclean)
+                {
+                    Console.WriteLine("VALUE OF CLEAN FOR %s %s", item.Key, item.Value);
+                    properties["$ "+item.Key]["clean"] = item.Value;
+                }
+                //end block set status
                 for (ushort i = 0; i < textfile.Count; i++)
                 {
                     #region get index titles if exist
@@ -352,207 +369,346 @@ namespace Controller
 
         #region IWriteEtabs Members
 
-
-        public void processe2kNoAislado(String story, Double cm)
+        private StringBuilder getNoAisladoObjectLoad(string story)
         {
-            if (File.Exists(path))
+            StringBuilder _text = new StringBuilder();
+            try
+            {
+                foreach (DataRow row in Model.MDEtabs.dtGlobal.Rows)
+                {
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  Dead  FZ  -{2}",
+                            row["joint"], story, row["dead"]));
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  Live  FZ  -{2}",
+                            row["joint"], story, row["live"]));
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SX  FX  {2}",
+                            row["joint"], story, row["fx"]));
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SY  FY  {2}",
+                            row["joint"], story, row["fy"]));
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SXV  FZ  -{2}",
+                            row["joint"], story, row["fzx"]));
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SYV  FZ  -{2}",
+                            row["joint"], story, row["fzy"]));
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  PDSX  MY  {2}",
+                            row["joint"], story, row["pdsx"]));
+                    _text.AppendLine(
+                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  PDSY  MX  -{2}",
+                            row["joint"], story, row["pdsy"]));
+                }
+                _text.AppendLine("");
+                _text.AppendLine("");
+            }
+            catch (Exception)
+            {}
+            return _text;
+        }
+
+        public void processe2kNoAislado(String story, Double cm, IDictionary<string, bool> fclean)
+        {
+            if (textfile.Count > 0)
             {
                 // iniciamos lectura de archivo
-                using (StreamReader read = new StreamReader(this.path, Encoding.UTF8))
+                #region read and write in the file for no aislado
+                #endregion
+                // define variables
+                String line;
+                StringBuilder allbody = new StringBuilder();
+                bool log = false;
+                List<string> toText = new List<string>();
+                // define options for write file
+                IDictionary<string, IDictionary<string, object>> properties = new Dictionary<string, IDictionary<string, object>>()
                 {
-                    String line;
-                    StringBuilder Text = new StringBuilder();
-                    bool load = false;
-                    int count = 1;
-                    for (int i = 0; i < File.ReadAllLines(path).Length; i++)
+                    #region Initialize properties validate
                     {
-                        line = read.ReadLine();
-                        #region switch
-                        count++;
-                        switch (line)
+                        "$ LOAD PATTERNS", new Dictionary<string, object>()
                         {
-                            case "$ LOAD PATTERNS":
-                                Text.AppendLine(line);
-                                Text.AppendLine("  LOADPATTERN \"PDSX\"  TYPE  \"Seismic\"  SELFWEIGHT  0");
-                                Text.AppendLine("  LOADPATTERN \"PDSY\"  TYPE  \"Seismic\"  SELFWEIGHT  0");
-                                Text.AppendLine("  SEISMIC \"PDSX\"  \"User Loads\"");
-                                Text.AppendLine("  SEISMIC \"PDSY\"  \"User Loads\"");
-                                Text.AppendLine("  LOADPATTERN \"SXV\"  TYPE  \"Other\"  SELFWEIGHT  0");
-                                Text.AppendLine("  LOADPATTERN \"SYV\"  TYPE  \"Other\"  SELFWEIGHT  0");
-                                break;
-                            case "$ POINT OBJECT LOADS":
-                                load = true;
-                                Text.AppendLine(line);
-                                // agregamos datos
-                                foreach (DataRow row in Model.MDEtabs.dtGlobal.Rows)
-                                {
-                                    // POINTLOAD  "2"  "Base"  TYPE "FORCE"  LC "Dead" FZ -23.88
-                                    // POINTLOAD  "2"  "Base"  TYPE "FORCE"  LC "Live" FZ -.6488  
-                                    // POINTLOAD  "2"  "Base"  TYPE "FORCE"  LC "SX"  FX 4.17  FZ -1.2363  MY 7.36
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  Dead  FZ  -{2}",
-                                            row["joint"], story, row["dead"]));
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  Live  FZ  -{2}",
-                                            row["joint"], story, row["live"]));
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SX  FX  {2}",
-                                            row["joint"], story, row["fx"]));
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SY  FY  {2}",
-                                            row["joint"], story, row["fy"]));
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SXV  FZ  -{2}",
-                                            row["joint"], story, row["fzx"]));
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  SYV  FZ  -{2}",
-                                            row["joint"], story, row["fzy"]));
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  PDSX  MY  {2}",
-                                            row["joint"], story, row["pdsx"]));
-                                    Text.AppendLine(
-                                        String.Format("  POINTLOAD  {0}  {1}  TYPE  FORCE  LC  PDSY  MX  -{2}",
-                                            row["joint"], story, row["pdsy"]));
-                                }
-                                Text.AppendLine("");
-                                Text.AppendLine("");
-                                break;
-                            case "$ FRAME OBJECT LOADS":
-                                load = false;
-                                Text.AppendLine(line);
-                                break;
-
-                            case "$ LOAD CASES":
-                                Text.AppendLine(line);
-                                Text.AppendLine("  LOADCASE \"SXV\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\"");
-                                Text.AppendLine("  LOADCASE \"SXV\"  LOADPAT  \"SXV\"  SF  1 ");
-                                Text.AppendLine("  LOADCASE \"SYV\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\"");
-                                Text.AppendLine("  LOADCASE \"SYV\"  LOADPAT  \"SYV\"  SF  1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  LOADCASE \"PDSX\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\"");
-                                Text.AppendLine("  LOADCASE \"PDSX\"  LOADPAT  \"PDSX\"  SF  1 ");
-                                Text.AppendLine("  LOADCASE \"PDSY\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\"");
-                                Text.AppendLine("  LOADCASE \"PDSY\"  LOADPAT  \"PDSY\"  SF  1");
-                                Text.AppendLine("");
-                                break;
-                            case "$ LOAD COMBINATIONS":
-                                Text.AppendLine(line);
-                                Text.AppendLine(String.Format("  COMBO \"MV1\"  TYPE \"Linear Add\"", cm));
-                                Text.AppendLine("  COMBO \"MV1\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                                Text.AppendLine("  COMBO \"MV1\"  LOADCASE \"Dead\"  SF 1.4 ");
-                                Text.AppendLine("  COMBO \"MV1\"  LOADCASE \"Live\"  SF 1.7 ");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MVSX2+\"  TYPE \"Linear Add\"  ");
-                                Text.AppendLine("  COMBO \"MVSX2+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                                Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"Dead\"  SF 1.25 ");
-                                Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"Live\"  SF 1.25 ");
-                                Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"SX\"  SF 1");
-                                Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"SXV\"  SF 1 ");
-                                Text.AppendLine(String.Format("  COMBO \"MVSX2+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MVSX2+\"  LOADCASE \"PDSX\"  SF 1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MSX3+\"  TYPE \"Linear Add\"  ");
-                                Text.AppendLine("  COMBO \"MSX3+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                                Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"Dead\"  SF 0.9 ");
-                                Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"SX\"  SF 1");
-                                Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"SXV\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"SV\"  SF 1");
-                                Text.AppendLine(String.Format("  COMBO \"MSX3+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MSX3+\"  LOADCASE \"PDSX\"  SF 1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MVSX2-\"  TYPE \"Linear Add\"  ");
-                                Text.AppendLine("  COMBO \"MVSX2-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                                Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"Dead\"  SF 1.25 ");
-                                Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"Live\"  SF 1.25 ");
-                                Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"SX\"  SF -1");
-                                Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"SXV\"  SF 1 ");
-                                Text.AppendLine(String.Format("  COMBO \"MVSX2-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MVSX2-\"  LOADCASE \"PDSX\"  SF -1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MSX3-\"  TYPE \"Linear Add\"  ");
-                                Text.AppendLine("  COMBO \"MSX3-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                                Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"Dead\"  SF 0.9 ");
-                                Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"SX\"  SF -1");
-                                Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"SXV\"  SF 1 ");
-                                Text.AppendLine(String.Format("  COMBO \"MSX3-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MSX3-\"  LOADCASE \"PDSX\"  SF -1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MVSY2+\"  TYPE \"Linear Add\"  ");
-                                Text.AppendLine("  COMBO \"MVSY2+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\" ");
-                                Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"Dead\"  SF 1.25 ");
-                                Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"Live\"  SF 1.25 ");
-                                Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"SY\"  SF 1");
-                                Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"SYV\"  SF 1 ");
-                                Text.AppendLine(String.Format("  COMBO \"MVSY2+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MVSY2+\"  LOADCASE \"PDSY\"  SF 1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MSY3+\"  TYPE \"Linear Add\"  ");
-                                Text.AppendLine("  COMBO \"MSY3+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                                Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"Dead\"  SF 0.9 ");
-                                Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"SY\"  SF 1");
-                                Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"SYV\"  SF 1 ");
-                                Text.AppendLine(String.Format("  COMBO \"MSY3+\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MSY3+\"  LOADCASE \"PDSY\"  SF 1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MVSY2-\"  TYPE \"Linear Add\"  ");
-                                Text.AppendLine("  COMBO \"MVSY2-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\" ");
-                                Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"Dead\"  SF 1.25 ");
-                                Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"Live\"  SF 1.25");
-                                Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"SY\"  SF -1");
-                                Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"SYV\"  SF 1 ");
-                                Text.AppendLine(String.Format("  COMBO \"MVSY2-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MVSY2-\"  LOADCASE \"PDSY\"  SF -1");
-                                Text.AppendLine("");
-                                Text.AppendLine("  COMBO \"MSY3-\"  TYPE \"Linear Add\" ");
-                                Text.AppendLine("  COMBO \"MSY3-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  ");
-                                Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"Dead\"  SF 0.9 ");
-                                Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"SY\"  SF -1");
-                                Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"SYV\"  SF 1 ");
-                                Text.AppendLine(String.Format("  COMBO \"MSY3-\"  LOADCASE \"DEAD\"  SF {0}", cm));
-                                Text.AppendLine("  COMBO \"MSY3-\"  LOADCASE \"PDSY\"  SF -1");
-
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  TYPE \"Envelope\" ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MV1\"  SF 1");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2+\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3+\"  SF 1");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2-\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3-\"  SF 1");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2+\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3+\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2-\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3-\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2+\"  SF 1");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3+\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2-\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3-\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2+\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3+\"  SF 1 ");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2-\"  SF 1");
-                                Text.AppendLine("  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3-\"  SF 1 ");
-                                break;
-                            default:
-                                if (!load)
-                                {
-                                    Text.AppendLine(line);
-                                }
-                                break;
+                            #region options for load patterns
+                            { "exists", false },
+                            { "clean", false },
+                            { "index", -1 },
+                            { "value", "  LOADPATTERN \"PDSX\"  TYPE  \"Seismic\"  SELFWEIGHT  0\r\n" +
+                                       "  LOADPATTERN \"PDSY\"  TYPE  \"Seismic\"  SELFWEIGHT  0\r\n" +
+                                       "  SEISMIC \"PDSX\"  \"User Loads\"\r\n" +
+                                       "  SEISMIC \"PDSY\"  \"User Loads\"\r\n" +
+                                       "  LOADPATTERN \"SXV\"  TYPE  \"Other\"  SELFWEIGHT  0\r\n" +
+                                       "  LOADPATTERN \"SYV\"  TYPE  \"Other\"  SELFWEIGHT  0\r\n" },
+                            #endregion
                         }
-                        // Console.WriteLine(count);
+                    },
+                    {
+                        "$ LOAD CASES", new Dictionary<string, object>()
+                        {
+                            #region options for load cases
+                            { "exists", false },
+                            { "clean", false },
+                            { "index", -1 },
+                            { "value", "\r\n"+
+                                        "  LOADCASE \"SXV\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\" \r\n"+
+                                        "  LOADCASE \"SXV\"  LOADPAT  \"SXV\"  SF  1  \r\n"+
+                                        "  LOADCASE \"SYV\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\" \r\n"+
+                                        "  LOADCASE \"SYV\"  LOADPAT  \"SYV\"  SF  1 \r\n"+
+                                        "\r\n"+
+                                        "  LOADCASE \"PDSX\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\" \r\n"+
+                                        "  LOADCASE \"PDSX\"  LOADPAT  \"PDSX\"  SF  1  \r\n"+
+                                        "  LOADCASE \"PDSY\"  TYPE  \"Linear Static\"  INITCOND  \"PRESET\" \r\n"+
+                                        "  LOADCASE \"PDSY\"  LOADPAT  \"PDSY\"  SF  1 \r\n"+
+                                        "\r\n"},
+                                    
+                            #endregion
+                        }
+                    },
+                    {
+                        "$ POINT OBJECT LOADS", new Dictionary<string, object>()
+                        {
+                            #region options point objects loads
+                            { "exists", false },
+                            { "clean", true },
+                            { "index", -1 },
+                            { "value",  getNoAisladoObjectLoad(story).ToString()}
+                            #endregion
+                        }
+                    },
+                    {
+                        "$ FRAME OBJECT LOADS", new Dictionary<string, object>()
+                        {
+                            #region options frame objects loads
+                            { "exists", false },
+                            { "clean", true },
+                            { "index", -1 },
+                            { "value", "" },
+                            #endregion
+                        }
+                    },
+                    {
+                        "$ LOAD COMBINATIONS", new Dictionary<string, object>()
+                        {
+                            #region data extends
+                            { "exists", false },
+                            { "clean", false },
+                            { "index", -1 },
+                            { "value", "\r\n" +
+                                        String.Format("  COMBO \"MV1\"  TYPE \"Linear Add\"", cm) + "\r\n" +
+                                        "  COMBO \"MV1\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"   \r\n" +
+                                        "  COMBO \"MV1\"  LOADCASE \"Dead\"  SF 1.4  \r\n" +
+                                        "  COMBO \"MV1\"  LOADCASE \"Live\"  SF 1.7  \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MVSX2+\"  TYPE \"Linear Add\"   \r\n" +
+                                        "  COMBO \"MVSX2+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"   \r\n" +
+                                        "  COMBO \"MVSX2+\"  LOADCASE \"Dead\"  SF 1.25  \r\n" +
+                                        "  COMBO \"MVSX2+\"  LOADCASE \"Live\"  SF 1.25  \r\n" +
+                                        "  COMBO \"MVSX2+\"  LOADCASE \"SX\"  SF 1 \r\n" +
+                                        "  COMBO \"MVSX2+\"  LOADCASE \"SXV\"  SF 1  \r\n" +
+                                        String.Format("  COMBO \"MVSX2+\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MVSX2+\"  LOADCASE \"PDSX\"  SF 1 \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MSX3+\"  TYPE \"Linear Add\"   \r\n" +
+                                        "  COMBO \"MSX3+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"   \r\n" +
+                                        "  COMBO \"MSX3+\"  LOADCASE \"Dead\"  SF 0.9  \r\n" +
+                                        "  COMBO \"MSX3+\"  LOADCASE \"SX\"  SF 1 \r\n" +
+                                        "  COMBO \"MSX3+\"  LOADCASE \"SXV\"  SF 1  \r\n" +
+                                        "  COMBO \"MSX3+\"  LOADCASE \"SV\"  SF 1 \r\n" +
+                                        String.Format("  COMBO \"MSX3+\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MSX3+\"  LOADCASE \"PDSX\"  SF 1 \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MVSX2-\"  TYPE \"Linear Add\"   \r\n" +
+                                        "  COMBO \"MVSX2-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"   \r\n" +
+                                        "  COMBO \"MVSX2-\"  LOADCASE \"Dead\"  SF 1.25  \r\n" +
+                                        "  COMBO \"MVSX2-\"  LOADCASE \"Live\"  SF 1.25  \r\n" +
+                                        "  COMBO \"MVSX2-\"  LOADCASE \"SX\"  SF -1 \r\n" +
+                                        "  COMBO \"MVSX2-\"  LOADCASE \"SXV\"  SF 1  \r\n" +
+                                        String.Format("  COMBO \"MVSX2-\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MVSX2-\"  LOADCASE \"PDSX\"  SF -1 \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MSX3-\"  TYPE \"Linear Add\"   \r\n" +
+                                        "  COMBO \"MSX3-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"   \r\n" +
+                                        "  COMBO \"MSX3-\"  LOADCASE \"Dead\"  SF 0.9  \r\n" +
+                                        "  COMBO \"MSX3-\"  LOADCASE \"SX\"  SF -1 \r\n" +
+                                        "  COMBO \"MSX3-\"  LOADCASE \"SXV\"  SF 1  \r\n" +
+                                        String.Format("  COMBO \"MSX3-\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MSX3-\"  LOADCASE \"PDSX\"  SF -1 \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MVSY2+\"  TYPE \"Linear Add\"   \r\n" +
+                                        "  COMBO \"MVSY2+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  \r\n" +
+                                        "  COMBO \"MVSY2+\"  LOADCASE \"Dead\"  SF 1.25  \r\n" +
+                                        "  COMBO \"MVSY2+\"  LOADCASE \"Live\"  SF 1.25  \r\n" +
+                                        "  COMBO \"MVSY2+\"  LOADCASE \"SY\"  SF 1 \r\n" +
+                                        "  COMBO \"MVSY2+\"  LOADCASE \"SYV\"  SF 1  \r\n" +
+                                        String.Format("  COMBO \"MVSY2+\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MVSY2+\"  LOADCASE \"PDSY\"  SF 1 \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MSY3+\"  TYPE \"Linear Add\"   \r\n" +
+                                        "  COMBO \"MSY3+\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"   \r\n" +
+                                        "  COMBO \"MSY3+\"  LOADCASE \"Dead\"  SF 0.9  \r\n" +
+                                        "  COMBO \"MSY3+\"  LOADCASE \"SY\"  SF 1 \r\n" +
+                                        "  COMBO \"MSY3+\"  LOADCASE \"SYV\"  SF 1  \r\n" +
+                                        String.Format("  COMBO \"MSY3+\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MSY3+\"  LOADCASE \"PDSY\"  SF 1 \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MVSY2-\"  TYPE \"Linear Add\"   \r\n" +
+                                        "  COMBO \"MVSY2-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"  \r\n" +
+                                        "  COMBO \"MVSY2-\"  LOADCASE \"Dead\"  SF 1.25  \r\n" +
+                                        "  COMBO \"MVSY2-\"  LOADCASE \"Live\"  SF 1.25 \r\n" +
+                                        "  COMBO \"MVSY2-\"  LOADCASE \"SY\"  SF -1 \r\n" +
+                                        "  COMBO \"MVSY2-\"  LOADCASE \"SYV\"  SF 1  \r\n" +
+                                        String.Format("  COMBO \"MVSY2-\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MVSY2-\"  LOADCASE \"PDSY\"  SF -1 \r\n" +
+                                        "\r\n" +
+                                        "  COMBO \"MSY3-\"  TYPE \"Linear Add\"  \r\n" +
+                                        "  COMBO \"MSY3-\"  DESIGN \"Concrete\"  COMBOTYPE \"Strength\"   \r\n" +
+                                        "  COMBO \"MSY3-\"  LOADCASE \"Dead\"  SF 0.9  \r\n" +
+                                        "  COMBO \"MSY3-\"  LOADCASE \"SY\"  SF -1 \r\n" +
+                                        "  COMBO \"MSY3-\"  LOADCASE \"SYV\"  SF 1  \r\n" +
+                                        String.Format("  COMBO \"MSY3-\"  LOADCASE \"DEAD\"  SF {0}", cm) + "\r\n" +
+                                        "  COMBO \"MSY3-\"  LOADCASE \"PDSY\"  SF -1 \r\n" +
+                                        "\r\n"+
+                                        "  COMBO \"ENVOLVENTE\"  TYPE \"Envelope\"  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MV1\"  SF 1 \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2+\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3+\"  SF 1 \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2-\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3-\"  SF 1 \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2+\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3+\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSX2-\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSX3-\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2+\"  SF 1 \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3+\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2-\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3-\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2+\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3+\"  SF 1  \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MVSY2-\"  SF 1 \r\n" +
+                                        "  COMBO \"ENVOLVENTE\"  LOADCOMBO \"MSY3-\"  SF 1  \r\n" }
+                        }
                         #endregion
+                    },
+                    {
+                        "$ LOG", new Dictionary<string, object>()
+                        {
+                            #region options log
+                            { "exists", true },
+                            { "index", -1 }
+                            #endregion
+                        }
+                    },
+                    #endregion
+                };
+                foreach (KeyValuePair<string, bool> item in fclean)
+                {
+                    Console.WriteLine("VALUE OF CLEAN FOR %s %s", item.Key, item.Value);
+                    properties["$ " + item.Key]["clean"] = item.Value;
+                }
+                for (ushort i = 0; i < textfile.Count; i++)
+                {
+                    #region paste item to totext and insert data
+                    line = textfile[i].ToString();
+                    toText.Add(line);
+                    switch (line)
+                    {
+                        case "$ LOAD PATTERNS":
+                            properties[line]["exists"] = true;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
+                            break;
+                        case "$ POINT OBJECT LOADS":
+                            properties[line]["exists"] = true;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
+                            break;
+                        case "$ FRAME OBJECT LOADS":
+                            properties[line]["exists"] = true;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
+                            break;
+                        case "$ LOAD CASES":
+                            properties[line]["exists"] = true;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
+                            break;
+                        case "$ LOAD COMBINATIONS":
+                            properties[line]["exists"] = true;
+                            if ((bool)properties[line]["clean"])
+                                i = cleanContentObject(i, textfile);
+                            properties[line]["index"] = toText.Count - 1;
+                            break;
+                        case "$ LOG":
+                            properties[line]["index"] = toText.Count - 1;
+                            break;
                     }
+                    // Console.WriteLine(count);
+                    #endregion
+                }
 
-                    // obtener nombre de archivo
-                    string[] par = this.path.Split(new char[] { '\\' });
-                    String direccion = destino;
-                    direccion += String.Format(@"\{0} - NoAislado.e2k", (par[par.Length - 1].Split('.')[0]));
-                    StreamWriter write = new StreamWriter(direccion, false, Encoding.ASCII);
-                    write.Write(Text.ToString());
-                    write.Close();
-                    Console.WriteLine("FINISH WRITE FILE!!!");
-                    read.Close();
+                foreach (string item in properties.Keys)
+                {
+                    #region add content for each title in the file exist and if not
+                    if (!item.ToString().Equals("$ LOG"))
+                    {
+                        if (Convert.ToBoolean(properties[item]["exists"]))
+                        {
+                            Int16 index = Convert.ToInt16(properties[item]["index"]);
+                            String body = "\r\n \r\n" + item + "\r\n \r\n";
+                            body += Convert.ToString(properties[item]["value"]);
+                            body += "\r\n \r\n";
+                            toText[index] = body;
+                            Console.WriteLine(item);
+                            Console.WriteLine(" EXISTS ADD");
+                        }
+                        else
+                        {
+                            Console.WriteLine(item);
+                            Console.WriteLine(" NO EXISTS ADD");
+                            Int16 index = Convert.ToInt16(properties["$ LOG"]["index"]);
+                            String text = toText[index];
+                            Console.WriteLine("INDEX " + index);
+                            //Console.WriteLine("content " + text);
+                            if (text.Equals("$ LOG"))
+                                text = "";
+                            text += "\r\n \r\n" + item + "\r\n \r\n";
+                            Console.WriteLine(properties[item]["value"]);
+                            text += Convert.ToString(properties[item]["value"]);
+                            text += "\r\n";
+                            toText[index] = text;
+                            log = true;
+                        }
+                    }
+                    #endregion
+                }
+
+                // now clean other line if exists
+                // finally add $ LOG if only keys not exists
+                if (log)
+                {
+                    #region add title $ LOG
+                    UInt16 index = Convert.ToUInt16(properties["$ LOG"]["index"]);
+                    String text = toText[index];
+                    text += "\r\n$ LOG\r\n";
+                    toText[index] = text;
+                    #endregion
+                }
+                // create new body text file
+                allbody.Append(string.Join("\r\n", toText.ToArray()));
+
+                // obtener nombre de archivo
+                string[] par = this.path.Split(new char[] { '\\' });
+                String direccion = destino;
+                direccion += String.Format(@"\{0} - NoAislado.e2k", (par[par.Length - 1].Split('.')[0]));
+                StreamWriter write = new StreamWriter(direccion, false, Encoding.ASCII);
+                write.Write(allbody);
+                write.Close();
+                Console.WriteLine("FINISH WRITE FILE!!!");
                 }
             }
-        }
 
         #endregion
     }
