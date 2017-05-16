@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Controller.Interfaces;
+using Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.IO;
-using System.Data;
-using Controller.Interfaces;
-using Model;
 
 
 namespace Controller
@@ -19,6 +19,8 @@ namespace Controller
         public decimal participacion;
         public string path;
         public decimal delta;
+        public bool error = false;
+        public string raise = "";
 
         #region IReadFileable Members
 
@@ -30,16 +32,33 @@ namespace Controller
             decimal fac = 1000;
             //try
             //{
-                String node = "";
-                while(read.Peek() >= 0)
+            String node = "";
+            UInt16 count = 0;
+            Boolean isValid = true;
+            while (read.Peek() >= 0)
+            {
+                #region loop
+                String cad = read.ReadLine();
+                string pattern = @"\s+";
+                string[] line = Regex.Split(cad, pattern);
+                Console.WriteLine("LENGTH DE ARRAY " + line.Length);
+                Console.WriteLine(string.Join(",", line));
+                //Console.WriteLine("NUMBER LINE " + count);
+                if (line.Length == 8 && count == 4)
                 {
-                    String cad = read.ReadLine();
-                    Console.WriteLine(cad);
-                    // Console.WriteLine(cad);
-                    string pattern = @"\s+";
-                    string[] line = Regex.Split(cad, pattern);
+                    string ton = "(Mton)";
+                    if (!line[1].Equals(ton) && !line[2].Equals(ton) && !line[3].Equals(ton))
+                    {
+                        raise = String.Format("{0} {1} {2}", line[1], line[2], line[3]);
+                        isValid = false;
+                    }
+                }
+                count++;
+                if (isValid)
+                {
                     if (line.Length == 10 && line[2].ToString() == "1:CM")
                     {
+                        #region Crear Nodo
                         // crea nuevo nodo
                         DataRow dr = Model.MDStaadPRO.dtGlobal.NewRow();
                         node = Convert.ToString(line[1]);
@@ -52,17 +71,19 @@ namespace Controller
                         dr["cmx"] = Convert.ToDecimal(line[3]);
                         dr["cmz"] = Convert.ToDecimal(line[5]);
                         Model.MDStaadPRO.dtGlobal.Rows.Add(dr);
+                        #endregion
                     }
                     if (line.Length == 9)
                     {
-                        Console.WriteLine("fila leida " + line[1].Split(':')[0].ToString().Trim());
+                        #region llenar tabla
+                        // Console.WriteLine("fila leida " + line[1].Split(':')[0].ToString().Trim());
                         if (Convert.ToInt16(line[1].Split(':')[0].ToString().Trim()) > 4)
                             continue;
                         string nodo = String.Format("nodo='{0}'", node);
                         DataRow[] drs = Model.MDStaadPRO.dtGlobal.Select(nodo);
                         if (drs.Length > 0)
                         {
-                            List<object[]> lst = rowData(line, line[1].Split(new char[] {':'}).Last().ToString().Trim());
+                            List<object[]> lst = rowData(line, line[1].Split(new char[] { ':' }).Last().ToString().Trim());
                             foreach (object[] row in lst)
                             {
                                 if (row[0].ToString() == "csxv" || row[0].ToString() == "cszv")
@@ -90,7 +111,7 @@ namespace Controller
                                 }
                                 else
                                 {
-                                    if (row[0].ToString() == "cm" || row[0].ToString() == "cv" ||row[0].ToString() == "csx" || row[0].ToString() == "csz")
+                                    if (row[0].ToString() == "cm" || row[0].ToString() == "cv" || row[0].ToString() == "csx" || row[0].ToString() == "csz")
                                     {
                                         drs[0][row[0].ToString()] = (Math.Abs(Convert.ToDecimal(row[1])) * fac);
                                     }
@@ -102,8 +123,17 @@ namespace Controller
                             }
                             Model.MDStaadPRO.dtGlobal.AcceptChanges();
                         }
+                    #endregion
                     }
                 }
+                else
+                {
+                    Console.WriteLine("ERROR DE UNIDAD - INCORRECTO");
+                    break;
+                }
+                #endregion
+            }
+            error = !isValid;
             //}
             //catch (Exception ex)
             //{

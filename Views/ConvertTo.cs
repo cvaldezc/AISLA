@@ -159,6 +159,7 @@ namespace Views
             String path = this.txtArchivoFormato.Text;
             String fbase = this.txtArchivoBase.Text;
             String ext = fbase.Split(new char[] { '.' }).Last();
+            bool valid = true;
             //Console.WriteLine(fbase);
             //Console.WriteLine(ext);
             BarraProgreso.status = 1;
@@ -207,30 +208,41 @@ namespace Views
                 staad.delta = Convert.ToDecimal(this.txtDelta.Value);
                 staad.path = path;
                 staad.ReadStaadPro();
-                staad.test();
-                BarraProgreso.status = 3;
-                statusBar();
-                // Escribir Archivo
-                WriteStaadPRO wsp = new WriteStaadPRO();
-                wsp.path = this.txtArchivoBase.Text;
-                wsp.destiny = this.txtArchivoDestino.Text;
-                StringBuilder txt = wsp.readFile();
-                wsp.initData();
-                wsp.processAisladoSTD(txt);
-                // NO AISLADO
-                WriteStaadPRO wp = new WriteStaadPRO();
-                wp.path = ""; //this.txtBaseNoAislado.Text;
-                wp.destiny = this.txtArchivoDestino.Text;
-                StringBuilder cad = wp.readFile();
-                wp.initData();
-                wp.processNoAisladoSTD(cad);
+                if (!staad.error)
+                {
+                    // staad.test();
+                    BarraProgreso.status = 3;
+                    statusBar();
+                    // Escribir Archivo
+                    WriteStaadPRO wsp = new WriteStaadPRO();
+                    wsp.path = this.txtArchivoBase.Text;
+                    wsp.destiny = this.txtArchivoDestino.Text;
+                    StringBuilder txt = wsp.readFile();
+                    wsp.initData();
+                    wsp.processAisladoSTD(txt);
+                    // NO AISLADO
+                    WriteStaadPRO wp = new WriteStaadPRO();
+                    wp.path = this.txtArchivoBase.Text;
+                    wp.destiny = this.txtArchivoDestino.Text;
+                    StringBuilder cad = wp.readFile();
+                    wp.initData();
+                    wp.processNoAisladoSTD(cad);
+                }
+                else
+                {
+                    MessageBox.Show("Error unidad " + staad.raise , "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valid = !staad.error;
+                }
             }
             #endregion
             // this.lblpasos.Text = "Completo!";
             #region reset progressbar and another controls
             BarraProgreso.status = 4;
             statusBar();
-            MessageBox.Show(this, "Archivos creados correctamente!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (valid)
+            {
+                MessageBox.Show(this, "Archivos creados correctamente!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             if (!BarraProgreso.tarea1.IsAlive)
             {
                 BarraProgreso.tarea1.Abort();
