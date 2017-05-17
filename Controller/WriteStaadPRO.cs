@@ -17,16 +17,32 @@ namespace Controller
         /// 
         public String path = "";
         public String destiny = "";
-        private Dictionary<string, bool> loads = new Dictionary<string, bool>()
+        private Dictionary<string, IDictionary<string, object>> labels = new Dictionary<string, IDictionary<string, object>>()
         {
-            {"LOAD 1 CM", false},
-            {"LOAD 2 CV", false},
-            {"LOAD 3 CSX", false},
-            {"LOAD 4 CSZ", false},
-            {"LOAD 5 CSXV", false},
-            {"LOAD 6 CSZV", false},
-            {"LOAD 7 PDSX", false},
-            {"LOAD 8 PDSZ", false},
+            {
+                "LOAD 1 CM", new Dictionary<string, object>() { { "exist", false }, { "clean", false }, { "index", -1 } }
+            },
+            {
+                "LOAD 2 CV", new Dictionary<string, object>() { { "exist", false}, { "clean", false}, { "index", -1 } }
+            },
+            {
+                "LOAD 3 CSX", new Dictionary<string, object>() { { "exist", false}, { "clean", false}, { "index", -1 } }
+            },
+            {
+                "LOAD 4 CSZ", new Dictionary<string, object>() { { "exist", false}, { "clean", false}, { "index", -1 } }
+            },
+            {
+                "LOAD 5 CSXV", new Dictionary<string, object>() { { "exist", false}, { "clean", false}, { "index", -1 } }
+            },
+            {
+                "LOAD 6 CSZV", new Dictionary<string, object>() { { "exist", false}, { "clean", false}, { "index", -1 } }
+            },
+            {
+                "LOAD 7 PDSX", new Dictionary<string, object>() { { "exist", false}, { "clean", false}, { "index", -1 } }
+            },
+            {
+                "LOAD 8 PDSZ", new Dictionary<string, object>() { { "exist", false}, { "clean", false}, { "index", -1 } }
+            },
         };
         private StringBuilder loadcm = new StringBuilder();
         private StringBuilder loadcv = new StringBuilder();
@@ -71,46 +87,52 @@ namespace Controller
 
         public StringBuilder readFile()
         {
-            StringBuilder block = new StringBuilder();
+            List<string> toText = new List<string>();
             if (File.Exists(this.path))
             {
-                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-                StreamReader sr = new StreamReader(fs, Encoding.UTF8);
-                try
+                toText = File.ReadAllLines(path, Encoding.UTF8).ToList<string>();
+                UInt16 count = 0;
+                foreach (string line in toText)
                 {
-                    // verify if file exists
-                        #region "Si el archivo existe"
-                        // comenzamos a leer en archivo base
-                        String line = "";
-                        // recorremos el archivo
-                        #region "While file"
-                        while (sr.Peek() >= 0)
-                        {
-                            line = sr.ReadLine();
-                            // get text
-                            block.AppendLine(line);
-                            // validLoads(line);
-                        }
-                        // Validar exisistencia de 
-                        // insert load cases
-                        #endregion
-                        #endregion
-                //}
-                //catch (Exception ex)
-                //{
-                //    Console.WriteLine("Error : " + ex.Message);
-                }
-                finally
-                {
-                    fs.Close();
-                    sr.Close();
-                }
+                    switch (line)
+                    {
+                        case "LOAD 1 CM":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                        case "LOAD 2 CV":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                        case "LOAD 3 CSX":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                        case "LOAD 4 CSZ":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                        case "LOAD 5 CSXV":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                        case "LOAD 6 CSZV":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                        case "LOAD 7 PDSX":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                        case "LOAD 8 PDSZ":
+                            labels[line]["exist"] = true;
+                            labels[line]["index"] = count;
+                            break;
+                    }
+                    count++;
+                }       
             }
-            else
-            {
-                Console.WriteLine("El archivo no se existe en la ubicación.");
-            }
-            return block;
+            return new StringBuilder();
         }
 
         public void processAisladoSTD(StringBuilder Text)
