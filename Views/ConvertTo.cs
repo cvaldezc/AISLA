@@ -200,48 +200,36 @@ namespace Views
             #region Process if file is extension staad pro
             if (ext.Equals("std"))
             {
-                Console.WriteLine("Staad PRO Read");
-                ReadFileStaadPRO staad = new ReadFileStaadPRO();
-                BarraProgreso.status = 2;
-                statusBar();
-                staad.participacion = Convert.ToDecimal(this.lblSismoVertical.Text);
-                staad.delta = Convert.ToDecimal(this.txtDelta.Value);
-                staad.path = path;
-                staad.ReadStaadPro();
-                if (!staad.error)
+                if (checkClearSTD())
                 {
-                    // staad.test();
-                    BarraProgreso.status = 3;
-                    statusBar();
-                    // Escribir Archivo
-                    WriteStaadPRO wsp = new WriteStaadPRO();
-                    wsp.path = this.txtArchivoBase.Text;
-                    wsp.destiny = this.txtArchivoDestino.Text;
-                    StringBuilder txt = wsp.readFile();
-                    wsp.initData();
-                    wsp.processAisladoSTD(txt);
-                    // NO AISLADO
-                    WriteStaadPRO wp = new WriteStaadPRO();
-                    wp.path = this.txtArchivoBase.Text;
-                    wp.destiny = this.txtArchivoDestino.Text;
-                    StringBuilder cad = wp.readFile();
-                    wp.initData();
-                    wp.processNoAisladoSTD(cad);
+                    if (MessageBox.Show(null, "Se va a eliminar el contenido de las etiquetas seleccionadas\r\nDesea Ud. continuar?", "ALERTA!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        valid = writeSTD(path);
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, "Se ha cancelado la operación", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        valid = false;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Error unidad " + staad.raise , "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    valid = !staad.error;
+                    valid = writeSTD(path);
                 }
             }
             #endregion
             // this.lblpasos.Text = "Completo!";
             #region reset progressbar and another controls
-            BarraProgreso.status = 4;
-            statusBar();
+            
             if (valid)
             {
+                BarraProgreso.status = 4;
+                statusBar();
                 MessageBox.Show(this, "Archivos creados correctamente!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }else
+            {
+                BarraProgreso.status = 0;
+                statusBar();
             }
             if (!BarraProgreso.tarea1.IsAlive)
             {
@@ -263,6 +251,7 @@ namespace Views
                     Invoke(new Action(() => this.pgbarpasos.Style = ProgressBarStyle.Blocks));
                     Invoke(new Action(() => this.pgbarpasos.Value = 0));
                     Invoke(new Action(() => this.pgcontador.Value = 0));
+                    Invoke(new Action(() => this.BtnProcesar.Enabled = true));
                     break;
                 #endregion
                 case 1:
@@ -398,6 +387,72 @@ namespace Views
                     MessageBox.Show(this, "Reporte creado Correctamente.", "Información!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
+        }
+
+        // verificar si el contenido del archivo se va a eliminar
+        private Boolean checkClearSTD()
+        {
+            bool check = false;
+            for (int i = 0; i < stdcblaislado.Items.Count; i++)
+            {
+                if (stdcblaislado.GetItemChecked(i))
+                {
+                    check = true;
+                    break;
+                }
+            }
+            if (!check)
+            {
+                for (int i = 0; i < this.stdcblnoaislado.Items.Count; i++)
+                {
+                    if (this.stdcblnoaislado.GetItemChecked(i))
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+            }
+            return check;
+        }
+
+        private Boolean writeSTD(String path)
+        {
+            bool status = false;
+            Console.WriteLine("Staad PRO Read");
+            ReadFileStaadPRO staad = new ReadFileStaadPRO();
+            BarraProgreso.status = 2;
+            statusBar();
+            staad.participacion = Convert.ToDecimal(this.lblSismoVertical.Text);
+            staad.delta = Convert.ToDecimal(this.txtDelta.Value);
+            staad.path = path;
+            staad.ReadStaadPro();
+            if (!staad.error)
+            {
+                // staad.test();
+                BarraProgreso.status = 3;
+                statusBar();
+                // Escribir Archivo
+                WriteStaadPRO wsp = new WriteStaadPRO();
+                wsp.path = this.txtArchivoBase.Text;
+                wsp.destiny = this.txtArchivoDestino.Text;
+                StringBuilder txt = wsp.readFile();
+                wsp.initData();
+                wsp.processAisladoSTD(txt);
+                // NO AISLADO
+                WriteStaadPRO wp = new WriteStaadPRO();
+                wp.path = this.txtArchivoBase.Text;
+                wp.destiny = this.txtArchivoDestino.Text;
+                StringBuilder cad = wp.readFile();
+                wp.initData();
+                wp.processNoAisladoSTD(cad);
+                status = true;
+            }
+            else
+            {
+                MessageBox.Show("Error unidad " + staad.raise, "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                status = !staad.error;
+            }
+            return status;
         }
     }
 }

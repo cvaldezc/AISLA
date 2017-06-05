@@ -87,6 +87,14 @@
             this.etabsclbaislado = new System.Windows.Forms.CheckedListBox();
             this.label10 = new System.Windows.Forms.Label();
             this.settingsStaadPro = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.stdcblnoaislado = new System.Windows.Forms.CheckedListBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.stdcblaislado = new System.Windows.Forms.CheckedListBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,6 +117,11 @@
             this.groupBox7.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.gbaislado.SuspendLayout();
+            this.settingsStaadPro.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -736,6 +749,8 @@
             // 
             // settingsStaadPro
             // 
+            this.settingsStaadPro.Controls.Add(this.groupBox10);
+            this.settingsStaadPro.Controls.Add(this.groupBox13);
             this.settingsStaadPro.Location = new System.Drawing.Point(23, 4);
             this.settingsStaadPro.Name = "settingsStaadPro";
             this.settingsStaadPro.Padding = new System.Windows.Forms.Padding(3);
@@ -743,6 +758,100 @@
             this.settingsStaadPro.TabIndex = 1;
             this.settingsStaadPro.Text = "Staad Pro";
             this.settingsStaadPro.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.groupBox12);
+            this.groupBox10.Controls.Add(this.label8);
+            this.groupBox10.Location = new System.Drawing.Point(346, 6);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(334, 234);
+            this.groupBox10.TabIndex = 2;
+            this.groupBox10.TabStop = false;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.stdcblnoaislado);
+            this.groupBox12.Location = new System.Drawing.Point(16, 45);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(312, 181);
+            this.groupBox12.TabIndex = 2;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "LIMPIAR CONTENIDO";
+            // 
+            // stdcblnoaislado
+            // 
+            this.stdcblnoaislado.CheckOnClick = true;
+            this.stdcblnoaislado.FormattingEnabled = true;
+            this.stdcblnoaislado.Items.AddRange(new object[] {
+            "LOAD 1 CM",
+            "LOAD 2 CV",
+            "LOAD 3 CSX",
+            "LOAD 4 CSZ",
+            "LOAD 5 CSVX",
+            "LOAD 6 CSVZ",
+            "LOAD 7 PDSX",
+            "LOAD 8 PDSZ",
+            "LOAD COMB 9"});
+            this.stdcblnoaislado.Location = new System.Drawing.Point(6, 19);
+            this.stdcblnoaislado.Name = "stdcblnoaislado";
+            this.stdcblnoaislado.Size = new System.Drawing.Size(300, 154);
+            this.stdcblnoaislado.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(13, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(138, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "MODELO NO AISLADO";
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.groupBox15);
+            this.groupBox13.Controls.Add(this.label9);
+            this.groupBox13.Location = new System.Drawing.Point(6, 6);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(334, 234);
+            this.groupBox13.TabIndex = 3;
+            this.groupBox13.TabStop = false;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.stdcblaislado);
+            this.groupBox15.Location = new System.Drawing.Point(16, 45);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(312, 181);
+            this.groupBox15.TabIndex = 2;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "LIMPIAR CONTENIDO";
+            // 
+            // stdcblaislado
+            // 
+            this.stdcblaislado.CheckOnClick = true;
+            this.stdcblaislado.FormattingEnabled = true;
+            this.stdcblaislado.Items.AddRange(new object[] {
+            "LOAD 5 CSVX",
+            "LOAD 6 CSVZ",
+            "LOAD 7 PDSX",
+            "LOAD 8 PDSZ",
+            "LOAD COMB 9"});
+            this.stdcblaislado.Location = new System.Drawing.Point(6, 19);
+            this.stdcblaislado.Name = "stdcblaislado";
+            this.stdcblaislado.Size = new System.Drawing.Size(300, 154);
+            this.stdcblaislado.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(13, 16);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(116, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "MODELO AISLADO";
             // 
             // ConvertTo
             // 
@@ -789,6 +898,13 @@
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.gbaislado.ResumeLayout(false);
+            this.settingsStaadPro.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.groupBox15.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -854,5 +970,13 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.CheckBox chkaislado;
         private System.Windows.Forms.TextBox txtaislado;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.CheckedListBox stdcblnoaislado;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.CheckedListBox stdcblaislado;
+        private System.Windows.Forms.Label label9;
     }
 }
