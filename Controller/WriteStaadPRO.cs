@@ -88,13 +88,17 @@ namespace Controller
         public StringBuilder readFile()
         {
             List<string> toText = new List<string>();
+            StringBuilder text = new StringBuilder();
             if (File.Exists(this.path))
             {
                 toText = File.ReadAllLines(path, Encoding.UTF8).ToList<string>();
                 UInt16 count = 0;
-                foreach (string line in toText)
+                for (int i = 0; i < toText.Count; i++)
                 {
-                    switch (line)
+                    string line = toText[i];
+                    text.AppendLine(line);
+                    #region "other data" 
+                    /*switch (line)
                     {
                         case "LOAD 1 CM":
                             labels[line]["exist"] = true;
@@ -128,11 +132,13 @@ namespace Controller
                             labels[line]["exist"] = true;
                             labels[line]["index"] = count;
                             break;
-                    }
-                    count++;
-                }       
+                    }*/
+                    // count++;
+
+                    #endregion
+                }
             }
-            return new StringBuilder();
+            return text;
         }
 
         public void processAisladoSTD(StringBuilder Text)

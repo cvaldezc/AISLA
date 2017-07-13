@@ -83,23 +83,28 @@ namespace Controller
                         DataRow[] drs = Model.MDStaadPRO.dtGlobal.Select(nodo);
                         if (drs.Length > 0)
                         {
-                            List<object[]> lst = rowData(line, line[1].Split(new char[] { ':' }).Last().ToString().Trim());
+                            decimal dead = Convert.ToDecimal(drs[0]["cm"]);
+                            List<object[]> lst = rowData(line, line[1].Split(new char[] { ':' }).Last().ToString().Trim(), dead);
                             foreach (object[] row in lst)
                             {
                                 if (row[0].ToString() == "csxv" || row[0].ToString() == "cszv")
                                 {
-                                    decimal sv = (Convert.ToDecimal(drs[0]["sv"]) * fac);
-                                    decimal csv = ((Math.Abs(Convert.ToDecimal(row[1])) * fac) + sv);
+                                    
+                                    decimal live = Convert.ToDecimal(drs[0]["cv"]);
+                                    decimal sv = (Convert.ToDecimal(drs[0]["sv"])); // @cvaldezch multiplication 1000
+                                    //((Math.Abs(Convert.ToDecimal(row[1])) * fac) + sv);
+                                    decimal csv = ((Math.Abs(Convert.ToDecimal(row[1])) * fac) + sv);  // ((Math.Abs(Convert.ToDecimal(row[1])) + this.participacion) * dead);
                                     drs[0][row[0].ToString()] = (csv);
                                     // formula para pdelta
-                                    decimal dead = Convert.ToDecimal(drs[0]["cm"]);
-                                    decimal live = Convert.ToDecimal(drs[0]["cv"]);
                                     //double acsfy = Math.Abs(Convert.ToDouble(row[1]));
                                     if (row[0].ToString() == "csxv")
                                     {
                                         //Math.Round((((dead + (0.5 * live) + fzx + sv) * delta) / 2), 2);
                                         drs[0]["pdsx"] = (Math.Round((((dead + (Convert.ToDecimal(0.5) * live) + csv) * delta) / 2), 2));
                                         drs[0]["pdsxa"] = (Math.Round((((dead + (Convert.ToDecimal(0.5) * live) + csv) * delta) / 2), 2));
+                                        //drs[0]["pdsx"] = (Math.Round(((Convert.ToDecimal(drs[0]["csx"]) + this.participacion) * dead), 2));
+                                        //drs[0]["pdsxa"] = (Math.Round(((Convert.ToDecimal(drs[0]["csx"]) + this.participacion) * dead), 2));
+
                                     }
 
                                     if (row[0].ToString() == "cszv")
@@ -107,6 +112,8 @@ namespace Controller
                                         //Math.Round((((dead + (0.5 * live) + fzx + sv) * delta) / 2), 2);
                                         drs[0]["pdsz"] = (Math.Round((((dead + (Convert.ToDecimal(0.5) * live) + csv) * delta) / 2), 2));
                                         drs[0]["pdsza"] = (Math.Round((((dead + (Convert.ToDecimal(0.5) * live) + csv) * delta) / 2), 2));
+                                        //drs[0]["pdsz"] = (Math.Round(((Convert.ToDecimal(drs[0]["csz"]) + this.participacion) * dead), 2));
+                                        //drs[0]["pdsza"] = (Math.Round(((Convert.ToDecimal(drs[0]["csz"]) + this.participacion) * dead), 2));
                                     }
                                 }
                                 else
@@ -147,7 +154,7 @@ namespace Controller
             close();
         }
 
-        private List<object[]> rowData(object[] row, String carga)
+        private List<object[]> rowData(object[] row, String carga, decimal dead)
         {
             List<object[]> lst = new List<object[]>();
             try
@@ -173,8 +180,9 @@ namespace Controller
                         obj[1] = Convert.ToDouble(row[2]);
                         lst.Add(obj);
                         obj = new object[2];
+                        // here change Convert.ToDouble(row[3])
                         obj[0] = "csxy";
-                        obj[1] = Convert.ToDouble(row[3]);
+                        obj[1] = ((Convert.ToDecimal(row[3]) * 1000) + (this.participacion * dead));
                         lst.Add(obj);
                         obj = new object[2];
                         obj[0] = "csxz";
@@ -186,8 +194,9 @@ namespace Controller
                         obj[1] = Convert.ToDouble(row[4]);
                         lst.Add(obj);
                         obj = new object[2];
+                        // here change Convert.ToDouble(row[3])
                         obj[0] = "cszy";
-                        obj[1] = Convert.ToDouble(row[3]);
+                        obj[1] = ((Convert.ToDecimal(row[3]) * 1000) + (this.participacion * dead));
                         lst.Add(obj);
                         obj = new object[2];
                         obj[0] = "cszx";

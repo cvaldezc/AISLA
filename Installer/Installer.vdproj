@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:Installer"
+"ProjectName" = "8:AISLA-Installer"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -15,32 +15,26 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_07F22D1249974D268067A810A4AB857F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_22FA1F06ECE54D0A87E16B17838F6DC4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2943225E21B949CB887626E68C0701C0"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_601CB9D109CFA4E37514200BF13FD32A"
+        "OwnerKey" = "8:_FBAB8EF7B18245B203A9F42EE461D374"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4DAE22739FB9A0156F82452BE8416ED0"
-        "OwnerKey" = "8:_2943225E21B949CB887626E68C0701C0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6922BCBF993EBEB745583C4723F2F9E5"
-        "OwnerKey" = "8:_4DAE22739FB9A0156F82452BE8416ED0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6922BCBF993EBEB745583C4723F2F9E5"
-        "OwnerKey" = "8:_2943225E21B949CB887626E68C0701C0"
+        "MsmKey" = "8:_601CB9D109CFA4E37514200BF13FD32A"
+        "OwnerKey" = "8:_07F22D1249974D268067A810A4AB857F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -63,20 +57,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6922BCBF993EBEB745583C4723F2F9E5"
+        "MsmKey" = "8:_FBAB8EF7B18245B203A9F42EE461D374"
+        "OwnerKey" = "8:_07F22D1249974D268067A810A4AB857F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2943225E21B949CB887626E68C0701C0"
+        "OwnerKey" = "8:_601CB9D109CFA4E37514200BF13FD32A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4DAE22739FB9A0156F82452BE8416ED0"
+        "OwnerKey" = "8:_07F22D1249974D268067A810A4AB857F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FBAB8EF7B18245B203A9F42EE461D374"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -204,45 +204,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4DAE22739FB9A0156F82452BE8416ED0"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Controller, Version=1.5.0.0, Culture=neutral, processorArchitecture=AMD64"
-                "ScatterAssemblies"
-                {
-                    "_4DAE22739FB9A0156F82452BE8416ED0"
-                    {
-                    "Name" = "8:Controller.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Controller.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6922BCBF993EBEB745583C4723F2F9E5"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_601CB9D109CFA4E37514200BF13FD32A"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6922BCBF993EBEB745583C4723F2F9E5"
+                    "_601CB9D109CFA4E37514200BF13FD32A"
                     {
                     "Name" = "8:Model.dll"
                     "Attributes" = "3:512"
@@ -326,6 +295,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FBAB8EF7B18245B203A9F42EE461D374"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Controller, Version=1.5.0.0, Culture=neutral, processorArchitecture=AMD64"
+                "ScatterAssemblies"
+                {
+                    "_FBAB8EF7B18245B203A9F42EE461D374"
+                    {
+                    "Name" = "8:Controller.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Controller.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -394,7 +394,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AISLA"
         "ProductCode" = "8:{55A8130D-1650-4C67-AA2B-CA34EB08BC36}"
-        "PackageCode" = "8:{0318F9A7-B6E6-4706-91C6-E0B298096158}"
+        "PackageCode" = "8:{2B4C7119-84E1-4C44-A7DB-C8FD65870D64}"
         "UpgradeCode" = "8:{A6BB93D1-E308-46CC-9CE6-C839D18AF86A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -522,7 +522,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_2943225E21B949CB887626E68C0701C0"
+            "Target" = "8:_07F22D1249974D268067A810A4AB857F"
             "Folder" = "8:_82A8D7EAAFC04F05A2F1E4A1C682A918"
             "WorkingFolder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
             "Icon" = "8:_22FA1F06ECE54D0A87E16B17838F6DC4"
@@ -536,7 +536,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_2943225E21B949CB887626E68C0701C0"
+            "Target" = "8:_07F22D1249974D268067A810A4AB857F"
             "Folder" = "8:_7B542A93E8B84B2D89321D78E2FCFB22"
             "WorkingFolder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
             "Icon" = "8:_22FA1F06ECE54D0A87E16B17838F6DC4"
@@ -1054,9 +1054,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2943225E21B949CB887626E68C0701C0"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_07F22D1249974D268067A810A4AB857F"
             {
-            "SourcePath" = "8:..\\Views\\obj\\x64\\Debug\\AISLA.exe"
+            "SourcePath" = "8:..\\Views\\obj\\x64\\Release\\AISLA.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
@@ -1074,7 +1074,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:Debug|x64"
+            "OutputConfiguration" = "8:Release|x64"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{F62897A1-1CC4-4405-AEAA-0339A0201D4E}"
             "ShowKeyOutput" = "11:TRUE"

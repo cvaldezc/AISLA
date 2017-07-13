@@ -251,7 +251,7 @@ namespace Controller
                 DataRow[] dr = Model.MDStaadPRO.dtGlobal.Select(null, null, DataViewRowState.CurrentRows);
                 int rindex = 4, ri = 0;
                 #region "load data"
-                int fac = 1000;
+                int fac = 1;
                 foreach (DataRow row in dr)
                 {
                     ri = rindex;
@@ -264,7 +264,7 @@ namespace Controller
                         ws.Cells[rindex, 1] = row["nodo"];
                         ws.Cells[rindex, 2] = "CM";
                         ws.Cells[rindex, 3] = (Convert.ToDecimal(row["cmx"]) / fac);
-                        ws.Cells[rindex, 4] = (Convert.ToDecimal(row["cm"]) / fac);
+                        ws.Cells[rindex, 4] = (Convert.ToDecimal(row["cm"])); // entre 1000
                         ws.Cells[rindex, 5] = (Convert.ToDecimal(row["cmz"]) / fac);
                         // MOMENTOS
                         ws.Cells[rindex, 6] = "0";
@@ -276,7 +276,7 @@ namespace Controller
                         ws.Cells[rindex, 1] = row["nodo"];
                         ws.Cells[rindex, 2] = "CV";
                         ws.Cells[rindex, 3] = (Convert.ToDecimal(row["cvx"]) / fac);
-                        ws.Cells[rindex, 4] = (Convert.ToDecimal(row["cv"]) / fac);
+                        ws.Cells[rindex, 4] = (Convert.ToDecimal(row["cv"])); // entre 1000
                         ws.Cells[rindex, 5] = (Convert.ToDecimal(row["cvz"]) / fac);
                         // MOMENTOS
                         ws.Cells[rindex, 6] = "0";
@@ -293,7 +293,7 @@ namespace Controller
                         // MOMENTOS
                         ws.Cells[rindex, 6] = "0";
                         ws.Cells[rindex, 7] = "0";
-                        ws.Cells[rindex, 8] = (Convert.ToDecimal(row["pdsz"]) / fac);
+                        ws.Cells[rindex, 8] = (Convert.ToDecimal(row["pdsz"]) ); // entre 1000
                         // fzy
                         rindex++;
                         // FUERZAS
@@ -303,7 +303,7 @@ namespace Controller
                         ws.Cells[rindex, 4] = (Convert.ToDecimal(row["cszy"]) / fac); // row["cszv"];
                         ws.Cells[rindex, 5] = (Convert.ToDecimal(row["csz"]) / fac);
                         // MOMENTOS
-                        ws.Cells[rindex, 6] = (Convert.ToDecimal(row["pdsx"]) / fac);
+                        ws.Cells[rindex, 6] = (Convert.ToDecimal(row["pdsx"]) ); // entre 1000
                         ws.Cells[rindex, 7] = "0";
                         ws.Cells[rindex, 8] = "0";
                         rindex++;
