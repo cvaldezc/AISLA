@@ -21,6 +21,7 @@ namespace Views
             chckText();
             checkedDefaultEtabs();
             CheckForIllegalCrossThreadCalls = false;
+            this.btnBaseNotIsolated.Enabled = false;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -51,11 +52,11 @@ namespace Views
                 this.txtArchivoBase.Text = this.oFD.FileName;
                 if (this.oFD.FileName.Split(new char[] { '.' }).Last() == "std")
                 {
-                    //this.btnBaseNoAislado.Enabled = true;
+                    this.btnBaseNotIsolated.Enabled = true;
                 }
                 else
                 {
-                    //this.btnBaseNoAislado.Enabled = false;
+                    this.btnBaseNotIsolated.Enabled = false;
                 }
             }
         }
@@ -72,10 +73,18 @@ namespace Views
 
         private void btnSelDestino_Click(object sender, EventArgs e)
         {
-            this.fBD = new FolderBrowserDialog();
-            if (this.fBD.ShowDialog() == DialogResult.OK)
+            //this.fBD = new FolderBrowserDialog();
+            //if (this.fBD.ShowDialog() == DialogResult.OK)
+            //{
+            //    this.txtArchivoDestino.Text = this.fBD.SelectedPath.ToString();
+            //}
+            this.uisaveFileDialog = new SaveFileDialog();
+            uisaveFileDialog.Title = "Selected Path";
+            this.uisaveFileDialog.RestoreDirectory = true;
+            this.uisaveFileDialog.FileName = "AISLA";
+            if (uisaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.txtArchivoDestino.Text = this.fBD.SelectedPath.ToString();
+                txtArchivoDestino.Text = uisaveFileDialog.FileName.Split(new string[] { "AISLA" }, StringSplitOptions.None)[0];
             }
         }
 
@@ -453,6 +462,16 @@ namespace Views
                 status = !staad.error;
             }
             return status;
+        }
+
+        private void btnBaseNotIsolated_Click(object sender, EventArgs e)
+        {
+            this.oFD = new OpenFileDialog();
+            this.oFD.Filter = "Importados (*.std) | *.std";
+            if (this.oFD.ShowDialog() == DialogResult.OK)
+            {
+                this.txtPathNotIsolated.Text = this.oFD.FileName;
+            }
         }
     }
 }

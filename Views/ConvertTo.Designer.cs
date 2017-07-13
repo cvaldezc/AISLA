@@ -32,10 +32,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSelArchivoFormato = new System.Windows.Forms.Button();
+            this.btnBaseNotIsolated = new System.Windows.Forms.Button();
             this.btnSelArchivoBase = new System.Windows.Forms.Button();
             this.txtArchivoFormato = new System.Windows.Forms.TextBox();
+            this.txtPathNotIsolated = new System.Windows.Forms.TextBox();
             this.txtArchivoBase = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -95,7 +98,7 @@
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.stdcblaislado = new System.Windows.Forms.CheckedListBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.uisaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -137,8 +140,8 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.41593F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.06195F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.50578F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.38938F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.19469F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(711, 452);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -147,8 +150,10 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnSelArchivoFormato);
+            this.groupBox1.Controls.Add(this.btnBaseNotIsolated);
             this.groupBox1.Controls.Add(this.btnSelArchivoBase);
             this.groupBox1.Controls.Add(this.txtArchivoFormato);
+            this.groupBox1.Controls.Add(this.txtPathNotIsolated);
             this.groupBox1.Controls.Add(this.txtArchivoBase);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label12);
@@ -158,12 +163,12 @@
             this.groupBox1.Size = new System.Drawing.Size(705, 136);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Entradas de Archivos";
+            this.groupBox1.Text = "Ingreso de Archivos";
             // 
             // btnSelArchivoFormato
             // 
             this.btnSelArchivoFormato.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelArchivoFormato.Location = new System.Drawing.Point(229, 96);
+            this.btnSelArchivoFormato.Location = new System.Drawing.Point(245, 95);
             this.btnSelArchivoFormato.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelArchivoFormato.Name = "btnSelArchivoFormato";
             this.btnSelArchivoFormato.Size = new System.Drawing.Size(29, 24);
@@ -171,6 +176,18 @@
             this.btnSelArchivoFormato.Text = "...";
             this.btnSelArchivoFormato.UseVisualStyleBackColor = true;
             this.btnSelArchivoFormato.Click += new System.EventHandler(this.btnSelArchivoFormato_Click);
+            // 
+            // btnBaseNotIsolated
+            // 
+            this.btnBaseNotIsolated.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBaseNotIsolated.Location = new System.Drawing.Point(245, 60);
+            this.btnBaseNotIsolated.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBaseNotIsolated.Name = "btnBaseNotIsolated";
+            this.btnBaseNotIsolated.Size = new System.Drawing.Size(29, 24);
+            this.btnBaseNotIsolated.TabIndex = 6;
+            this.btnBaseNotIsolated.Text = "...";
+            this.btnBaseNotIsolated.UseVisualStyleBackColor = true;
+            this.btnBaseNotIsolated.Click += new System.EventHandler(this.btnBaseNotIsolated_Click);
             // 
             // btnSelArchivoBase
             // 
@@ -189,11 +206,21 @@
             this.txtArchivoFormato.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtArchivoFormato.Enabled = false;
-            this.txtArchivoFormato.Location = new System.Drawing.Point(263, 99);
+            this.txtArchivoFormato.Location = new System.Drawing.Point(279, 99);
             this.txtArchivoFormato.Name = "txtArchivoFormato";
-            this.txtArchivoFormato.Size = new System.Drawing.Size(436, 20);
+            this.txtArchivoFormato.Size = new System.Drawing.Size(420, 20);
             this.txtArchivoFormato.TabIndex = 3;
             this.txtArchivoFormato.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // txtPathNotIsolated
+            // 
+            this.txtPathNotIsolated.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPathNotIsolated.Enabled = false;
+            this.txtPathNotIsolated.Location = new System.Drawing.Point(279, 63);
+            this.txtPathNotIsolated.Name = "txtPathNotIsolated";
+            this.txtPathNotIsolated.Size = new System.Drawing.Size(420, 20);
+            this.txtPathNotIsolated.TabIndex = 2;
             // 
             // txtArchivoBase
             // 
@@ -211,9 +238,19 @@
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(16, 101);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(208, 13);
+            this.label2.Size = new System.Drawing.Size(214, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "ARCHIVO DE DATOS ( *.xlsx | *.txt )";
+            this.label2.Text = "ARCHIVO DE DATOS ( *.xlsx | *.txt ): ";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(16, 66);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(207, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "ARCHIVO NO AISLADO (BASE *.std): ";
             // 
             // label1
             // 
@@ -229,9 +266,9 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 195);
+            this.groupBox2.Location = new System.Drawing.Point(3, 200);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(705, 254);
+            this.groupBox2.Size = new System.Drawing.Size(705, 249);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -247,7 +284,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(699, 235);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(699, 230);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox4
@@ -261,7 +298,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox4.Location = new System.Drawing.Point(397, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(294, 229);
+            this.groupBox4.Size = new System.Drawing.Size(294, 224);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             // 
@@ -340,7 +377,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(388, 229);
+            this.groupBox5.Size = new System.Drawing.Size(388, 224);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Datos Adicionales";
@@ -392,13 +429,13 @@
             // 
             // lblSismoVertical
             // 
-            this.lblSismoVertical.AutoSize = true;
-            this.lblSismoVertical.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSismoVertical.Location = new System.Drawing.Point(284, 110);
+            this.lblSismoVertical.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSismoVertical.Location = new System.Drawing.Point(308, 105);
             this.lblSismoVertical.Name = "lblSismoVertical";
-            this.lblSismoVertical.Size = new System.Drawing.Size(54, 16);
+            this.lblSismoVertical.Size = new System.Drawing.Size(53, 23);
             this.lblSismoVertical.TabIndex = 2;
             this.lblSismoVertical.Text = "label10";
+            this.lblSismoVertical.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
             // 
@@ -406,9 +443,9 @@
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(10, 112);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(268, 13);
+            this.label7.Size = new System.Drawing.Size(292, 13);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Participación CM (Sismo Vertical 0.2(ZxSx2.5))";
+            this.label7.Text = "Participación CM = (Sismo Vertical 0.2(ZxSx2.5)) =";
             // 
             // label6
             // 
@@ -416,9 +453,9 @@
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(10, 81);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 13);
+            this.label6.Size = new System.Drawing.Size(118, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "S (Tipo de Suelo)";
+            this.label6.Text = "S (TIPO DE SUELO ): ";
             // 
             // label5
             // 
@@ -426,9 +463,9 @@
             this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(10, 55);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 13);
+            this.label5.Size = new System.Drawing.Size(127, 13);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Z (Factor de Zona)";
+            this.label5.Text = "Z (FACTOR DE ZONA): ";
             // 
             // label4
             // 
@@ -436,9 +473,9 @@
             this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(10, 28);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "DELTA";
+            this.label4.Text = "DELTA: ";
             // 
             // groupBox3
             // 
@@ -447,7 +484,7 @@
             this.groupBox3.Controls.Add(this.txtArchivoDestino);
             this.groupBox3.Location = new System.Drawing.Point(3, 145);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(702, 44);
+            this.groupBox3.Size = new System.Drawing.Size(702, 49);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Salida de Archivos";
@@ -455,7 +492,7 @@
             // btnSelDestino
             // 
             this.btnSelDestino.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelDestino.Location = new System.Drawing.Point(98, 18);
+            this.btnSelDestino.Location = new System.Drawing.Point(167, 18);
             this.btnSelDestino.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelDestino.Name = "btnSelDestino";
             this.btnSelDestino.Size = new System.Drawing.Size(29, 24);
@@ -470,18 +507,18 @@
             this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(16, 25);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 13);
+            this.label3.Size = new System.Drawing.Size(146, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Exportar en";
+            this.label3.Text = "GUARDAR ARCHIVOS EN: ";
             // 
             // txtArchivoDestino
             // 
             this.txtArchivoDestino.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtArchivoDestino.Enabled = false;
-            this.txtArchivoDestino.Location = new System.Drawing.Point(132, 19);
+            this.txtArchivoDestino.Location = new System.Drawing.Point(201, 21);
             this.txtArchivoDestino.Name = "txtArchivoDestino";
-            this.txtArchivoDestino.Size = new System.Drawing.Size(564, 20);
+            this.txtArchivoDestino.Size = new System.Drawing.Size(495, 20);
             this.txtArchivoDestino.TabIndex = 4;
             // 
             // oFD
@@ -562,7 +599,7 @@
             this.tpsettings.Location = new System.Drawing.Point(4, 22);
             this.tpsettings.Name = "tpsettings";
             this.tpsettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tpsettings.Size = new System.Drawing.Size(717, 439);
+            this.tpsettings.Size = new System.Drawing.Size(717, 458);
             this.tpsettings.TabIndex = 1;
             this.tpsettings.Text = "Configuración";
             this.tpsettings.UseVisualStyleBackColor = true;
@@ -578,7 +615,7 @@
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(711, 433);
+            this.tabControl2.Size = new System.Drawing.Size(711, 452);
             this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl2.TabIndex = 0;
             // 
@@ -589,7 +626,7 @@
             this.settingEtabs.Location = new System.Drawing.Point(23, 4);
             this.settingEtabs.Name = "settingEtabs";
             this.settingEtabs.Padding = new System.Windows.Forms.Padding(3);
-            this.settingEtabs.Size = new System.Drawing.Size(684, 425);
+            this.settingEtabs.Size = new System.Drawing.Size(684, 444);
             this.settingEtabs.TabIndex = 0;
             this.settingEtabs.Text = "Etabs";
             this.settingEtabs.UseVisualStyleBackColor = true;
@@ -855,15 +892,12 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "MODELO AISLADO";
             // 
-            // label12
+            // uisaveFileDialog
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(16, 68);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(147, 13);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "NO AISLADO (BASE *.std)";
+            this.uisaveFileDialog.AddExtension = false;
+            this.uisaveFileDialog.FileName = "AISLA";
+            this.uisaveFileDialog.Title = "SAVE AISLA";
+            this.uisaveFileDialog.ValidateNames = false;
             // 
             // ConvertTo
             // 
@@ -991,5 +1025,8 @@
         private System.Windows.Forms.CheckedListBox stdcblaislado;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnBaseNotIsolated;
+        private System.Windows.Forms.TextBox txtPathNotIsolated;
+        private System.Windows.Forms.SaveFileDialog uisaveFileDialog;
     }
 }
