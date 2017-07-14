@@ -449,7 +449,7 @@ namespace Views
                 wsp.processAisladoSTD(txt);
                 // NO AISLADO
                 WriteStaadPRO wp = new WriteStaadPRO();
-                wp.path = this.txtArchivoBase.Text;
+                wp.path = this.txtPathNotIsolated.Text;
                 wp.destiny = this.txtArchivoDestino.Text;
                 StringBuilder cad = wp.readFile();
                 wp.initData();

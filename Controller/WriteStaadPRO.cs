@@ -14,7 +14,8 @@ namespace Controller
         /// path : Address file base where overwrite 
         /// destiny : Address file destiny
         /// </summary>
-        /// 
+        ///
+        public List<string> listToText = new List<string>();
         public String path = "";
         public String destiny = "";
         private Dictionary<string, IDictionary<string, object>> labels = new Dictionary<string, IDictionary<string, object>>()
@@ -93,12 +94,14 @@ namespace Controller
             {
                 toText = File.ReadAllLines(path, Encoding.UTF8).ToList<string>();
                 UInt16 count = 0;
-                for (int i = 0; i < toText.Count; i++)
+                this.listToText = toText;
+                /// not process loop for version old not used
+                for (int i = 0; i < 0; i++)
                 {
                     string line = toText[i];
                     text.AppendLine(line);
                     #region "other data" 
-                    /*switch (line)
+                    switch (line)
                     {
                         case "LOAD 1 CM":
                             labels[line]["exist"] = true;
@@ -132,11 +135,12 @@ namespace Controller
                             labels[line]["exist"] = true;
                             labels[line]["index"] = count;
                             break;
-                    }*/
+                    }
                     // count++;
 
                     #endregion
                 }
+                // end block
             }
             return text;
         }
@@ -144,7 +148,164 @@ namespace Controller
         public void processAisladoSTD(StringBuilder Text)
         {
             preload();
-            StringBuilder tmpAislado = Text;
+            StringBuilder tmpAislado = new StringBuilder();
+
+            //here clean content back to file
+            Console.WriteLine("LIST SIZE "+ this.listToText.Count);
+            List<string> tmp = new List<string>();
+            for (int i = 0; i < this.listToText.Count; i++)
+            {
+                #region "clean content file isolated"
+                string line = this.listToText[i];
+                switch (line)
+                {
+                    case "LOAD 5 CSXV":
+                        #region "Clear method isolated load 5"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 6 CSZV" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 6 CSZV":
+                        #region "Clear method isolated load 6"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 7 PDSX" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 7 PDSX":
+                        #region "Clear method isolated load 7"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 8 PDSZ" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 8 PDSZ":
+                        #region "Clear method isolated load 8"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD COMB 9 1.4CM+1.7CV" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD COMB 9 1.4CM+1.7CV":
+                        #region "Clear method isolated combo 9"
+                        // i = i + 1;
+                        // tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "LOAD COMB 9 1.4CM+1.7CV")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "PRINT ANALYSIS RESULTS" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    default:
+                        tmp.Add(line);
+                        break;
+                }
+                #endregion
+            }
+
+            // list convert to string
+            for (int i = 0; i < tmp.Count; i++)
+            {
+                tmpAislado.AppendLine(tmp[i]);
+            }
             // agregar LOAD CM
             // loadcm.AppendLine("LOAD 2 CV");
             //loadcm.Append("JOINT LOAD");
@@ -175,13 +336,15 @@ namespace Controller
             tmpAislado.Replace("PERFORM ANALYSIS", loadapdsz.Insert(0, String.Format("LOAD 8 PDSZ{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
             // agregar combos
             tmpAislado.Replace("PERFORM ANALYSIS", combos.ToString());
+            // clean if exists
+            tmpAislado.Replace("LOAD LIST 1 5 TO 18", String.Format("{0}", Environment.NewLine));
             // agregar
             tmpAislado.Replace("PRINT ANALYSIS RESULTS", String.Format("PRINT ANALYSIS RESULTS{0}LOAD LIST 1 5 TO 18", Environment.NewLine));
             //Escribiendo archivo Aislado
             // obtener nombre de archivo
             string[] par = this.path.Split(new char[] { '\\' });
             String direccion = destiny;
-            direccion += String.Format(@"\{0} - Aislado.std", (par[par.Length - 1].Split(new char[] { '.' }).First()));
+            direccion += String.Format(@"\{0} - AISLADO.std", (par[par.Length - 1].Split(new char[] { '.' }).First()));
             StreamWriter write = new StreamWriter(direccion, false, Encoding.ASCII);
             write.Write(tmpAislado.ToString());
             write.Close();
@@ -192,43 +355,311 @@ namespace Controller
         {
             //try
             //{
-                preload();
-                StringBuilder tmpNOAislado = Text;
-                // agregar LOAD CM
-                loadcm.Append("LOAD 2 CV");
-                tmpNOAislado.Replace("LOAD 2 CV", loadcm.Insert(0, String.Format("JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar LOAD CV
-                loadcv.Append("LOAD 3 CSX");
-                tmpNOAislado.Replace("LOAD 3 CSX", loadcv.Insert(0, String.Format("JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar LOAD CSX
-                tmpNOAislado.Replace("LOAD 3 CSX", loadcsx.Insert(0, String.Format("LOAD 3 CSX{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar LOAD CSZ
-                tmpNOAislado.Replace("LOAD 4 CSZ", loadcsz.Insert(0, String.Format("LOAD 4 CSZ{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar LOAD CSXV
-                loadcsxv.Append("PERFORM ANALYSIS");
-                tmpNOAislado.Replace("PERFORM ANALYSIS", loadcsxv.Insert(0, String.Format("LOAD 5 CSXV{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar LOAD CSZV
-                loadcszv.Append("PERFORM ANALYSIS");
-                tmpNOAislado.Replace("PERFORM ANALYSIS", loadcszv.Insert(0, string.Format("LOAD 6 CSZV{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar LOAD PDSX
-                loadpdsx.Append("PERFORM ANALYSIS");
-                tmpNOAislado.Replace("PERFORM ANALYSIS", loadpdsx.Insert(0, String.Format("LOAD 7 PDSX{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar LOAD PDSZ
-                loadpdsz.Append("PERFORM ANALYSIS");
-                tmpNOAislado.Replace("PERFORM ANALYSIS", loadpdsz.Insert(0, String.Format("LOAD 8 PDSZ{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
-                // agregar combos
-                tmpNOAislado.Replace("PERFORM ANALYSIS", combos.ToString());
-                // agregar
-                tmpNOAislado.Replace("PRINT ANALYSIS RESULTS", String.Format("PRINT ANALYSIS RESULTS{0}LOAD LIST 1 5 TO 18", Environment.NewLine));
-                //Escribiendo archivo Aislado
-                // obtener nombre de archivo
-                string[] par = this.path.Split(new char[] { '\\' });
-                String direccion = destiny;
-                direccion += String.Format(@"\{0} - NoAislado.std", (par[par.Length - 1].Split(new char[] {'.'}).First()));
-                StreamWriter write = new StreamWriter(direccion, false, Encoding.ASCII);
-                write.Write(tmpNOAislado.ToString());
-                write.Close();
-                Console.WriteLine("FINISH WRITE FILE!!!");
+            preload();
+            StringBuilder tmpNOAislado = new StringBuilder();
+
+            //here clean content back to file
+            Console.WriteLine("LIST SIZE " + this.listToText.Count);
+            List<string> tmp = new List<string>();
+            for (int i = 0; i < this.listToText.Count; i++)
+            {
+                #region "clean content file not isolated"
+                string line = this.listToText[i];
+                switch (line)
+                {
+                    case "LOAD 1 CM":
+                        #region "Clear method not isolated load 1"
+                        i = i + 1;
+                        tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD" || ltmp == "LOAD 2 CV" || ltmp == "PERFORM ANALYSIS")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 2 CV" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 2 CV":
+                        #region "Clear method not isolated load 2 "
+                        i = i + 1;
+                        tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD" || ltmp == "LOAD 3 CSX" || ltmp == "PERFORM ANALYSIS")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 3 CSX" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 3 CSX":
+                        #region "Clear method not isolated load 3"
+                        i = i + 1;
+                        tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD" || ltmp == "LOAD 4 CSZ" || ltmp == "PERFORM ANALYSIS")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 4 CSZ" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 4 CSZ":
+                        #region "Clear method not isolated load 4"
+                        i = i + 1;
+                        tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD" || ltmp == "LOAD 5 CSXV" || ltmp == "PERFORM ANALYSIS")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 5 CSXV" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 5 CSXV":
+                        #region "Clear method not isolated load 5"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 6 CSZV" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 6 CSZV":
+                        #region "Clear method isolated load 6"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 7 PDSX" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 7 PDSX":
+                        #region "Clear method isolated load 7"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD 8 PDSZ" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD 8 PDSZ":
+                        #region "Clear method isolated load 8"
+                        i = i + 1;
+                        //tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "JOINT LOAD")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "LOAD COMB 9 1.4CM+1.7CV" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    case "LOAD COMB 9 1.4CM+1.7CV":
+                        #region "Clear method isolated combo 9"
+                        // i = i + 1;
+                        // tmp.Add(line);
+                        for (int zv = i; zv < this.listToText.Count; zv++)
+                        {
+                            string ltmp = this.listToText[zv];
+                            if (ltmp == "LOAD COMB 9 1.4CM+1.7CV")
+                            {
+                                for (int c = zv; c < this.listToText.Count; c++)
+                                {
+                                    string sltmp = this.listToText[c];
+                                    if (sltmp == "PRINT ANALYSIS RESULTS" || sltmp == "PERFORM ANALYSIS")
+                                    {
+                                        i = c - 1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                //tmp.Add(ltmp);
+                            }
+                        }
+                        #endregion
+                        break;
+                    default:
+                        tmp.Add(line);
+                        break;
+                }
+                #endregion
+            }
+
+            // list convert to string
+            for (int i = 0; i < tmp.Count; i++)
+            {
+                tmpNOAislado.AppendLine(tmp[i]);
+            }
+
+            // agregar LOAD CM
+            loadcm.Append("LOAD 2 CV");
+            tmpNOAislado.Replace("LOAD 2 CV", loadcm.Insert(0, String.Format("JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar LOAD CV
+            loadcv.Append("LOAD 3 CSX");
+            tmpNOAislado.Replace("LOAD 3 CSX", loadcv.Insert(0, String.Format("JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar LOAD CSX
+            tmpNOAislado.Replace("LOAD 3 CSX", loadcsx.Insert(0, String.Format("LOAD 3 CSX{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar LOAD CSZ
+            tmpNOAislado.Replace("LOAD 4 CSZ", loadcsz.Insert(0, String.Format("LOAD 4 CSZ{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar LOAD CSXV
+            loadcsxv.Append("PERFORM ANALYSIS");
+            tmpNOAislado.Replace("PERFORM ANALYSIS", loadcsxv.Insert(0, String.Format("LOAD 5 CSXV{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar LOAD CSZV
+            loadcszv.Append("PERFORM ANALYSIS");
+            tmpNOAislado.Replace("PERFORM ANALYSIS", loadcszv.Insert(0, string.Format("LOAD 6 CSZV{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar LOAD PDSX
+            loadpdsx.Append("PERFORM ANALYSIS");
+            tmpNOAislado.Replace("PERFORM ANALYSIS", loadpdsx.Insert(0, String.Format("LOAD 7 PDSX{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar LOAD PDSZ
+            loadpdsz.Append("PERFORM ANALYSIS");
+            tmpNOAislado.Replace("PERFORM ANALYSIS", loadpdsz.Insert(0, String.Format("LOAD 8 PDSZ{0}JOINT LOAD{0}", Environment.NewLine)).ToString());
+            // agregar combos
+            tmpNOAislado.Replace("PERFORM ANALYSIS", combos.ToString());
+            // agregar
+            // clean if exists
+            tmpNOAislado.Replace("LOAD LIST 1 5 TO 18", String.Format("{0}", Environment.NewLine));
+            tmpNOAislado.Replace("PRINT ANALYSIS RESULTS", String.Format("PRINT ANALYSIS RESULTS{0}LOAD LIST 1 5 TO 18", Environment.NewLine));
+            //Escribiendo archivo Aislado
+            // obtener nombre de archivo
+            string[] par = this.path.Split(new char[] { '\\' });
+            String direccion = destiny;
+            direccion += String.Format(@"\{0} - NOAISLADO.std", (par[par.Length - 1].Split(new char[] {'.'}).First()));
+            StreamWriter write = new StreamWriter(direccion, false, Encoding.ASCII);
+            write.Write(tmpNOAislado.ToString());
+            write.Close();
+            Console.WriteLine("FINISH WRITE FILE!!!");
             //}
             //catch (Exception ex)
             //{
