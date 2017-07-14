@@ -226,7 +226,7 @@ namespace Controller
 
                 }
                 #endregion
-                this.path = String.Format(@"{0}\REPORTE-ETABS.xlsx", this.path);
+                this.path = String.Format(@"{0}REPORTE-ETABS.xlsx", this.path);
                 wb.SaveAs(path, Excel.XlFileFormat.xlOpenXMLWorkbook, myvalue,
                 myvalue, false, false, Excel.XlSaveAsAccessMode.xlNoChange,
                 Excel.XlSaveConflictResolution.xlUserResolution, true,
@@ -354,7 +354,7 @@ namespace Controller
                     }
                 }
                 #endregion
-                this.path = String.Format(@"{0}\REPORTE-STAADPRO.xlsx", this.path);
+                this.path = String.Format(@"{0}REPORTE-STAADPRO.xlsx", this.path);
                 wb.SaveAs(path, Excel.XlFileFormat.xlOpenXMLWorkbook, myvalue,
                 myvalue, false, false, Excel.XlSaveAsAccessMode.xlNoChange,
                 Excel.XlSaveConflictResolution.xlUserResolution, true,
