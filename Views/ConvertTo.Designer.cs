@@ -793,7 +793,7 @@
             this.settingsStaadPro.Location = new System.Drawing.Point(23, 4);
             this.settingsStaadPro.Name = "settingsStaadPro";
             this.settingsStaadPro.Padding = new System.Windows.Forms.Padding(3);
-            this.settingsStaadPro.Size = new System.Drawing.Size(684, 425);
+            this.settingsStaadPro.Size = new System.Drawing.Size(684, 444);
             this.settingsStaadPro.TabIndex = 1;
             this.settingsStaadPro.Text = "Staad Pro";
             this.settingsStaadPro.UseVisualStyleBackColor = true;
@@ -821,6 +821,7 @@
             // stdcblnoaislado
             // 
             this.stdcblnoaislado.CheckOnClick = true;
+            this.stdcblnoaislado.Enabled = false;
             this.stdcblnoaislado.FormattingEnabled = true;
             this.stdcblnoaislado.Items.AddRange(new object[] {
             "LOAD 1 CM",
@@ -870,6 +871,7 @@
             // stdcblaislado
             // 
             this.stdcblaislado.CheckOnClick = true;
+            this.stdcblaislado.Enabled = false;
             this.stdcblaislado.FormattingEnabled = true;
             this.stdcblaislado.Items.AddRange(new object[] {
             "LOAD 5 CSVX",
