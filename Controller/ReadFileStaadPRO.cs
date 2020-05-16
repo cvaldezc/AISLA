@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Controller.Constants;
+using Constants;
 
 namespace Controller
 {
@@ -151,9 +151,9 @@ namespace Controller
             //{
             //    close();
             //}
-            Console.WriteLine(DELIMITER_LOG_START);
+            Console.WriteLine(Constants.DELIMITER_LOG_START);
             test();
-            Console.WriteLine(DELIMITER_LOG_END);
+            Console.WriteLine(Constants.DELIMITER_LOG_END);
 
             close();
         }
