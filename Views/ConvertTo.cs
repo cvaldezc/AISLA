@@ -79,6 +79,7 @@ namespace Views
             //    this.txtArchivoDestino.Text = this.fBD.SelectedPath.ToString();
             //}
             /*this.uisaveFileDialog = new SaveFileDialog();
+
             uisaveFileDialog.Title = "Selected Path";
             this.uisaveFileDialog.RestoreDirectory = true;
             this.uisaveFileDialog.FileName = "AISLA";
@@ -90,6 +91,7 @@ namespace Views
             if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtArchivoDestino.Text = folderBrowserDialog1.SelectedPath;
+
             }
         }
 
