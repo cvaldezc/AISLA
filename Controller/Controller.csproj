@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BarraProgreso.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Exportar.cs" />
     <Compile Include="Interfaces\IExportar.cs" />
     <Compile Include="Interfaces\IReadFileable.cs" />

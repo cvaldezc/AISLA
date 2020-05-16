@@ -226,7 +226,7 @@ namespace Controller
 
                 }
                 #endregion
-                this.path = String.Format(@"{0}REPORTE-ETABS.xlsx", this.path);
+                this.path = String.Format(@"{0}/REPORTE-ETABS.xlsx", this.path);
                 wb.SaveAs(path, Excel.XlFileFormat.xlOpenXMLWorkbook, myvalue,
                 myvalue, false, false, Excel.XlSaveAsAccessMode.xlNoChange,
                 Excel.XlSaveConflictResolution.xlUserResolution, true,
@@ -286,9 +286,17 @@ namespace Controller
                         rindex++;
                         // FUERZAS
                         ws.Cells[rindex, 1] = row["nodo"];
-                        ws.Cells[rindex, 2] = "CSVX";
+                        
                         ws.Cells[rindex, 3] = (Convert.ToDecimal(row["csx"]) / fac);
-                        ws.Cells[rindex, 4] = (Convert.ToDecimal(row["csxy"]) / fac); // row["csxv"];
+                        if (i == 1)
+                        {
+                            ws.Cells[rindex, 2] = "CSX";
+                            ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["csxv"]) - Convert.ToDecimal(row["sv"])) / fac); // row["csxv"];
+                        } else
+                        {
+                            ws.Cells[rindex, 2] = "CSVX";
+                            ws.Cells[rindex, 4] = (Convert.ToDecimal(row["csxy"]) / fac); // row["csxv"];
+                        }
                         ws.Cells[rindex, 5] = (Convert.ToDecimal(row["csxz"]) / fac);
                         // MOMENTOS
                         ws.Cells[rindex, 6] = "0";
@@ -298,9 +306,18 @@ namespace Controller
                         rindex++;
                         // FUERZAS
                         ws.Cells[rindex, 1] = row["nodo"];
-                        ws.Cells[rindex, 2] = "CSVZ";
+                        
                         ws.Cells[rindex, 3] = (Convert.ToDecimal(row["cszx"]) / fac);
-                        ws.Cells[rindex, 4] = (Convert.ToDecimal(row["cszy"]) / fac); // row["cszv"];
+                        if (i == 1)
+                        {
+                            ws.Cells[rindex, 2] = "CSZ";
+                            ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["cszv"]) - Convert.ToDecimal(row["sv"])) / fac); // row["cszv"];
+                        }
+                        else
+                        {
+                            ws.Cells[rindex, 2] = "CSVZ";
+                            ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["cszy"]) - Convert.ToDecimal(row["sv"])) / fac); // row["cszv"];
+                        }
                         ws.Cells[rindex, 5] = (Convert.ToDecimal(row["csz"]) / fac);
                         // MOMENTOS
                         ws.Cells[rindex, 6] = (Convert.ToDecimal(row["pdsx"]) ); // entre 1000
@@ -354,7 +371,7 @@ namespace Controller
                     }
                 }
                 #endregion
-                this.path = String.Format(@"{0}REPORTE-STAADPRO.xlsx", this.path);
+                this.path = String.Format(@"{0}/REPORTE-STAADPRO.xlsx", this.path);
                 wb.SaveAs(path, Excel.XlFileFormat.xlOpenXMLWorkbook, myvalue,
                 myvalue, false, false, Excel.XlSaveAsAccessMode.xlNoChange,
                 Excel.XlSaveConflictResolution.xlUserResolution, true,
