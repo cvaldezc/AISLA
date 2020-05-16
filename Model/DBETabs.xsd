@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet" targetNamespace="http://tempuri.org/DataSet.xsd" xmlns:mstns="http://tempuri.org/DataSet.xsd" xmlns="http://tempuri.org/DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet" msprop:Generator_UserDSName="DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="GLOBAL" msprop:Generator_TableClassName="GLOBALDataTable" msprop:Generator_TableVarName="tableGLOBAL" msprop:Generator_RowChangedName="GLOBALRowChanged" msprop:Generator_TablePropName="GLOBAL" msprop:Generator_RowDeletingName="GLOBALRowDeleting" msprop:Generator_RowChangingName="GLOBALRowChanging" msprop:Generator_RowEvHandlerName="GLOBALRowChangeEventHandler" msprop:Generator_RowDeletedName="GLOBALRowDeleted" msprop:Generator_RowClassName="GLOBALRow" msprop:Generator_UserTableName="GLOBAL" msprop:Generator_RowEvArgName="GLOBALRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="story" msprop:Generator_ColumnVarNameInTable="columnstory" msprop:Generator_ColumnPropNameInRow="story" msprop:Generator_ColumnPropNameInTable="storyColumn" msprop:Generator_UserColumnName="story" type="xs:string" minOccurs="0" />
+              <xs:element name="joint" msprop:Generator_ColumnVarNameInTable="columnjoint" msprop:Generator_ColumnPropNameInRow="joint" msprop:Generator_ColumnPropNameInTable="jointColumn" msprop:Generator_UserColumnName="joint" type="xs:string" />
+              <xs:element name="dead" msprop:Generator_ColumnVarNameInTable="columndead" msprop:Generator_ColumnPropNameInRow="dead" msprop:Generator_ColumnPropNameInTable="deadColumn" msprop:Generator_UserColumnName="dead" type="xs:double" minOccurs="0" />
+              <xs:element name="live" msprop:Generator_ColumnVarNameInTable="columnlive" msprop:Generator_ColumnPropNameInRow="live" msprop:Generator_ColumnPropNameInTable="liveColumn" msprop:Generator_UserColumnName="live" type="xs:double" minOccurs="0" />
+              <xs:element name="fzx" msprop:Generator_ColumnVarNameInTable="columnfzx" msprop:Generator_ColumnPropNameInRow="fzx" msprop:Generator_ColumnPropNameInTable="fzxColumn" msprop:Generator_UserColumnName="fzx" type="xs:double" minOccurs="0" />
+              <xs:element name="fzy" msprop:Generator_ColumnVarNameInTable="columnfzy" msprop:Generator_ColumnPropNameInRow="fzy" msprop:Generator_ColumnPropNameInTable="fzyColumn" msprop:Generator_UserColumnName="fzy" type="xs:double" minOccurs="0" />
+              <xs:element name="pdsx" msprop:Generator_ColumnVarNameInTable="columnpdsx" msprop:Generator_ColumnPropNameInRow="pdsx" msprop:Generator_ColumnPropNameInTable="pdsxColumn" msprop:Generator_UserColumnName="pdsx" type="xs:string" minOccurs="0" />
+              <xs:element name="pdsy" msprop:Generator_ColumnVarNameInTable="columnpdsy" msprop:Generator_ColumnPropNameInRow="pdsy" msprop:Generator_ColumnPropNameInTable="pdsyColumn" msprop:Generator_UserColumnName="pdsy" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SX" msprop:Generator_TableClassName="SXDataTable" msprop:Generator_TableVarName="tableSX" msprop:Generator_RowChangedName="SXRowChanged" msprop:Generator_TablePropName="SX" msprop:Generator_RowDeletingName="SXRowDeleting" msprop:Generator_RowChangingName="SXRowChanging" msprop:Generator_RowEvHandlerName="SXRowChangeEventHandler" msprop:Generator_RowDeletedName="SXRowDeleted" msprop:Generator_RowClassName="SXRow" msprop:Generator_UserTableName="SX" msprop:Generator_RowEvArgName="SXRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="story" msprop:Generator_ColumnVarNameInTable="columnstory" msprop:Generator_ColumnPropNameInRow="story" msprop:Generator_ColumnPropNameInTable="storyColumn" msprop:Generator_UserColumnName="story" type="xs:string" minOccurs="0" />
+              <xs:element name="joint" msprop:Generator_ColumnVarNameInTable="columnjoint" msprop:Generator_ColumnPropNameInRow="joint" msprop:Generator_ColumnPropNameInTable="jointColumn" msprop:Generator_UserColumnName="joint" type="xs:string" minOccurs="0" />
+              <xs:element name="case" msprop:Generator_ColumnVarNameInTable="columncase" msprop:Generator_ColumnPropNameInRow="_case" msprop:Generator_ColumnPropNameInTable="caseColumn" msprop:Generator_UserColumnName="case" type="xs:string" minOccurs="0" />
+              <xs:element name="fx" msprop:Generator_ColumnVarNameInTable="columnfx" msprop:Generator_ColumnPropNameInRow="fx" msprop:Generator_ColumnPropNameInTable="fxColumn" msprop:Generator_UserColumnName="fx" type="xs:string" minOccurs="0" />
+              <xs:element name="fz" msprop:Generator_ColumnVarNameInTable="columnfz" msprop:Generator_ColumnPropNameInRow="fz" msprop:Generator_ColumnPropNameInTable="fzColumn" msprop:Generator_UserColumnName="fz" type="xs:string" minOccurs="0" />
+              <xs:element name="my" msprop:Generator_ColumnVarNameInTable="columnmy" msprop:Generator_ColumnPropNameInRow="my" msprop:Generator_ColumnPropNameInTable="myColumn" msprop:Generator_UserColumnName="my" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SY" msprop:Generator_TableClassName="SYDataTable" msprop:Generator_TableVarName="tableSY" msprop:Generator_RowChangedName="SYRowChanged" msprop:Generator_TablePropName="SY" msprop:Generator_RowDeletingName="SYRowDeleting" msprop:Generator_RowChangingName="SYRowChanging" msprop:Generator_RowEvHandlerName="SYRowChangeEventHandler" msprop:Generator_RowDeletedName="SYRowDeleted" msprop:Generator_RowClassName="SYRow" msprop:Generator_UserTableName="SY" msprop:Generator_RowEvArgName="SYRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="story" msprop:Generator_ColumnVarNameInTable="columnstory" msprop:Generator_ColumnPropNameInRow="story" msprop:Generator_ColumnPropNameInTable="storyColumn" msprop:Generator_UserColumnName="story" type="xs:string" minOccurs="0" />
+              <xs:element name="joint" msprop:Generator_ColumnVarNameInTable="columnjoint" msprop:Generator_ColumnPropNameInRow="joint" msprop:Generator_ColumnPropNameInTable="jointColumn" msprop:Generator_UserColumnName="joint" type="xs:string" minOccurs="0" />
+              <xs:element name="case" msprop:Generator_ColumnVarNameInTable="columncase" msprop:Generator_ColumnPropNameInRow="_case" msprop:Generator_ColumnPropNameInTable="caseColumn" msprop:Generator_UserColumnName="case" type="xs:string" minOccurs="0" />
+              <xs:element name="fy" msprop:Generator_ColumnVarNameInTable="columnfy" msprop:Generator_ColumnPropNameInRow="fy" msprop:Generator_ColumnPropNameInTable="fyColumn" msprop:Generator_UserColumnName="fy" type="xs:string" minOccurs="0" />
+              <xs:element name="fz" msprop:Generator_ColumnVarNameInTable="columnfz" msprop:Generator_ColumnPropNameInRow="fz" msprop:Generator_ColumnPropNameInTable="fzColumn" msprop:Generator_UserColumnName="fz" type="xs:string" minOccurs="0" />
+              <xs:element name="mx" msprop:Generator_ColumnVarNameInTable="columnmx" msprop:Generator_ColumnPropNameInRow="mx" msprop:Generator_ColumnPropNameInTable="mxColumn" msprop:Generator_UserColumnName="mx" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="GLOBALKey" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:GLOBAL" />
+      <xs:field xpath="mstns:joint" />
+    </xs:unique>
+    <xs:unique name="SXKey">
+      <xs:selector xpath=".//mstns:SX" />
+      <xs:field xpath="mstns:joint" />
+    </xs:unique>
+    <xs:unique name="SYKey">
+      <xs:selector xpath=".//mstns:SY" />
+      <xs:field xpath="mstns:joint" />
+    </xs:unique>
+    <xs:keyref name="FK_GLOBAL_SY" refer="GLOBALKey" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:SY" />
+      <xs:field xpath="mstns:joint" />
+    </xs:keyref>
+    <xs:keyref name="FK_GLOBAL_SX" refer="GLOBALKey" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:SX" />
+      <xs:field xpath="mstns:joint" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>
