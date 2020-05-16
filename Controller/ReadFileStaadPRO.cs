@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-
+using Controller.Constants;
 
 namespace Controller
 {
@@ -89,7 +89,7 @@ namespace Controller
                             {
                                 if (row[0].ToString() == "csxv" || row[0].ToString() == "cszv")
                                 {
-                                    
+
                                     decimal live = Convert.ToDecimal(drs[0]["cv"]);
                                     decimal sv = (Convert.ToDecimal(drs[0]["sv"])); // @cvaldezch multiplication 1000
                                     //((Math.Abs(Convert.ToDecimal(row[1])) * fac) + sv);
@@ -149,8 +149,12 @@ namespace Controller
             //}
             //finally
             //{
-            //    close();        
+            //    close();
             //}
+            Console.WriteLine(DELIMITER_LOG_START);
+            test();
+            Console.WriteLine(DELIMITER_LOG_END);
+
             close();
         }
 
