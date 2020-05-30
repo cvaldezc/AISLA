@@ -288,15 +288,10 @@ namespace Controller
                         ws.Cells[rindex, 1] = row["nodo"];
                         
                         ws.Cells[rindex, 3] = (Convert.ToDecimal(row["csx"]) / fac);
-                        if (i == 1)
-                        {
-                            ws.Cells[rindex, 2] = "CSX";
-                            ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["csxv"]) - Convert.ToDecimal(row["sv"])) / fac); // row["csxv"];
-                        } else
-                        {
-                            ws.Cells[rindex, 2] = "CSVX";
-                            ws.Cells[rindex, 4] = (Convert.ToDecimal(row["csxy"]) / fac); // row["csxv"];
-                        }
+                        
+                        ws.Cells[rindex, 2] = "CSX";
+                        ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["csxv"]) - Convert.ToDecimal(row["sv"])) / fac); // row["csxv"];
+                        
                         ws.Cells[rindex, 5] = (Convert.ToDecimal(row["csxz"]) / fac);
                         // MOMENTOS
                         ws.Cells[rindex, 6] = "0";
@@ -308,16 +303,11 @@ namespace Controller
                         ws.Cells[rindex, 1] = row["nodo"];
                         
                         ws.Cells[rindex, 3] = (Convert.ToDecimal(row["cszx"]) / fac);
-                        if (i == 1)
-                        {
-                            ws.Cells[rindex, 2] = "CSZ";
-                            ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["cszv"]) - Convert.ToDecimal(row["sv"])) / fac); // row["cszv"];
-                        }
-                        else
-                        {
-                            ws.Cells[rindex, 2] = "CSVZ";
-                            ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["cszy"]) - Convert.ToDecimal(row["sv"])) / fac); // row["cszv"];
-                        }
+                        
+                        ws.Cells[rindex, 2] = "CSZ";
+                        ws.Cells[rindex, 4] = ((Convert.ToDecimal(row["cszv"]) - Convert.ToDecimal(row["sv"])) / fac); // row["cszv"];
+                        
+                            
                         ws.Cells[rindex, 5] = (Convert.ToDecimal(row["csz"]) / fac);
                         // MOMENTOS
                         ws.Cells[rindex, 6] = (Convert.ToDecimal(row["pdsx"]) ); // entre 1000

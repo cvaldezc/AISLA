@@ -65,7 +65,7 @@ namespace Controller
                         dr["nodo"] = node;
                         dr["cm"] = dead * fac;
                         /// TODO: en la linea anterior
-                        dr["sv"] = ((dead * this.participacion));
+                        dr["sv"] = (Convert.ToDecimal(dr["cm"]) * this.participacion);
                         // other data for report
                         dr["cmx"] = Convert.ToDecimal(line[3]);
                         dr["cmz"] = Convert.ToDecimal(line[5]);

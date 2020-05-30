@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6401CAC5520245EA98BD21E8447312BE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7B88A0D3B0712556FBCED4FAD8220498"
         "OwnerKey" = "8:_FDEF38DACE9F8C5085FF4CC6C1326D0D"
         "MsmSig" = "8:_UNDEFINED"
@@ -28,18 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_7B88A0D3B0712556FBCED4FAD8220498"
-        "OwnerKey" = "8:_CE573040A41C44A293AABD3D5BEA9147"
+        "OwnerKey" = "8:_6401CAC5520245EA98BD21E8447312BE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_B1884A7A563848B49C5ADF4FEA8711BA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CE573040A41C44A293AABD3D5BEA9147"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -58,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_FDEF38DACE9F8C5085FF4CC6C1326D0D"
-        "OwnerKey" = "8:_CE573040A41C44A293AABD3D5BEA9147"
+        "OwnerKey" = "8:_6401CAC5520245EA98BD21E8447312BE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,7 +70,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE573040A41C44A293AABD3D5BEA9147"
+        "OwnerKey" = "8:_6401CAC5520245EA98BD21E8447312BE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -119,7 +119,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Installer.msi"
+        "OutputFilename" = "8:Release\\Aisla-Installer1.11.0.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -394,7 +394,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AISLA"
         "ProductCode" = "8:{55A8130D-1650-4C67-AA2B-CA34EB08BC36}"
-        "PackageCode" = "8:{A74759FB-A162-4101-8D9A-0FDCAD99D7E0}"
+        "PackageCode" = "8:{524BC25C-76A1-46FF-9154-86DF829B76B8}"
         "UpgradeCode" = "8:{A6BB93D1-E308-46CC-9CE6-C839D18AF86A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -522,7 +522,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_CE573040A41C44A293AABD3D5BEA9147"
+            "Target" = "8:_6401CAC5520245EA98BD21E8447312BE"
             "Folder" = "8:_82A8D7EAAFC04F05A2F1E4A1C682A918"
             "WorkingFolder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
             "Icon" = "8:_22FA1F06ECE54D0A87E16B17838F6DC4"
@@ -536,7 +536,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_CE573040A41C44A293AABD3D5BEA9147"
+            "Target" = "8:_6401CAC5520245EA98BD21E8447312BE"
             "Folder" = "8:_7B542A93E8B84B2D89321D78E2FCFB22"
             "WorkingFolder" = "8:_771F83C955FB4A0D91C4E50DB66B76E3"
             "Icon" = "8:_22FA1F06ECE54D0A87E16B17838F6DC4"
@@ -1054,7 +1054,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CE573040A41C44A293AABD3D5BEA9147"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6401CAC5520245EA98BD21E8447312BE"
             {
             "SourcePath" = "8:..\\Views\\obj\\x64\\Release\\AISLA.exe"
             "TargetName" = "8:"

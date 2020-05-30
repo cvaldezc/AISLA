@@ -385,7 +385,12 @@
             // 
             // txtTipoSuelo
             // 
-            this.txtTipoSuelo.DecimalPlaces = 2;
+            this.txtTipoSuelo.DecimalPlaces = 4;
+            this.txtTipoSuelo.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.txtTipoSuelo.Location = new System.Drawing.Point(137, 79);
             this.txtTipoSuelo.Name = "txtTipoSuelo";
             this.txtTipoSuelo.Size = new System.Drawing.Size(239, 20);
@@ -400,7 +405,12 @@
             // 
             // txtDelta
             // 
-            this.txtDelta.DecimalPlaces = 2;
+            this.txtDelta.DecimalPlaces = 4;
+            this.txtDelta.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.txtDelta.Location = new System.Drawing.Point(137, 19);
             this.txtDelta.Name = "txtDelta";
             this.txtDelta.Size = new System.Drawing.Size(239, 20);
@@ -415,7 +425,12 @@
             // 
             // txtZonaZ
             // 
-            this.txtZonaZ.DecimalPlaces = 2;
+            this.txtZonaZ.DecimalPlaces = 4;
+            this.txtZonaZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.txtZonaZ.Location = new System.Drawing.Point(137, 48);
             this.txtZonaZ.Name = "txtZonaZ";
             this.txtZonaZ.Size = new System.Drawing.Size(239, 20);

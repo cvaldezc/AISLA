@@ -127,7 +127,7 @@ namespace Views
             Double facZona = Convert.ToDouble((!string.IsNullOrEmpty(txtZonaZ.Value.ToString())) ? this.txtZonaZ.Value : 0);
             Double tipoSuelo = Convert.ToDouble((!string.IsNullOrEmpty(txtTipoSuelo.Value.ToString())) ? this.txtTipoSuelo.Value : 0);
             Double calc = (facZona * tipoSuelo * 0.2 * 2.5);
-            this.lblSismoVertical.Text = Math.Round(calc, 2).ToString();
+            this.lblSismoVertical.Text = (Math.Truncate(calc * 10000) / 10000).ToString();
         }
 
         private void txtZonaZ_ValueChanged(object sender, EventArgs e)
